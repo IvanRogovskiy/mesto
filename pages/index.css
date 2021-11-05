@@ -17,3 +17,11 @@
 @import url(../blocks/profile/__info-rank/profile__info-rank.css);
 @import url(../blocks/profile/__info-edit/profile__info-edit-button.css);
 @import url(../blocks/profile/__addButton/profile__add-button.css);
+
+@import url(../blocks/places/places.css);
+@import url(../blocks/place/place.css);
+@import url(../blocks/place/__fav/place__fav.css);
+@import url(../blocks/place/__info/place__info.css);
+@import url(../blocks/place/__name/place__name.css);
+@import url(../blocks/place/__image/place__image.css);
+
