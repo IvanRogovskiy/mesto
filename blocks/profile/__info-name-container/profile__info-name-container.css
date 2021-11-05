@@ -1,0 +1,5 @@
+.profile__info-name-container {
+    display: flex;
+    margin: 0 0 16px;
+    align-items: center;
+}

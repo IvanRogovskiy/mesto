@@ -9,6 +9,11 @@
 @import url(../blocks/header/__logo/header__logo.css);
 
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__info-container/profile__info-container.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__info-name-container/profile__info-name-container.css);
 @import url(../blocks/profile/__info/profile__info.css);
-@import url(../blocks/profile/__addButton/profile__addButton.css);
+@import url(../blocks/profile/__info-name/profile__info-name.css);
+@import url(../blocks/profile/__info-rank/profile__info-rank.css);
+@import url(../blocks/profile/__info-edit/profile__info-edit-button.css);
+@import url(../blocks/profile/__addButton/profile__add-button.css);
