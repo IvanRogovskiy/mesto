@@ -1,5 +1,10 @@
 .profile__add-button {
     width: 150px;
     height: 50px;
+    transition: opacity .3s;
+}
 
+.profile__add-button:hover {
+    opacity: .6;
+    cursor: pointer;
 }

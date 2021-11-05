@@ -1,3 +1,8 @@
 .place__fav {
+transition: opacity .3s;
+}
 
+.place__fav:hover {
+    opacity: .6;
+    cursor: pointer;
 }

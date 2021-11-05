@@ -2,4 +2,10 @@
     height: 24px;
     width: 24px;
     margin-left: 18px;
+    transition: opacity .3s;
+}
+
+.profile__info-edit-button:hover {
+    opacity: .5;
+    cursor: pointer;
 }
