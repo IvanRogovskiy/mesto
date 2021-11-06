@@ -26,10 +26,16 @@
     }
 }
 
-/*@media screen and (max-width:770px) {*/
-/*    .profile {*/
-/*        display: flex;*/
-/*        flex-direction: column;*/
-/*        padding-bottom: 68px;*/
-/*    }*/
-/*}*/
+@media screen and (max-width:570px) {
+    .profile {
+        grid-template-columns: 320px;
+
+    }
+}
+
+@media screen and (max-width:470px) {
+    .profile {
+        grid-template-columns: 100%;
+
+    }
+}

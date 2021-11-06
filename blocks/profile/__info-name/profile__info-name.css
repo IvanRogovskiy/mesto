@@ -4,3 +4,15 @@
     line-height: 48px;
     margin: 0;
 }
+
+@media screen and (max-width:570px) {
+    .profile__info-name {
+        font-size: 32px;
+    }
+}
+
+@media screen and (max-width:480px) {
+    .profile__info-name {
+        font-size: 1.5em;
+    }
+}
