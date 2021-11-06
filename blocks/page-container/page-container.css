@@ -1,8 +1,25 @@
 .page-container {
+    width: 100%;
     max-width: 880px;
-    margin: 0 auto;
+    min-width: 320px;
+    padding-left: 200px;
+    padding-right: 200px;
+    /*margin: 0 auto;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 1px solid red;
+}
+
+@media screen and (max-width:1280px) {
+    .page-container {
+        padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));
+        padding-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));
+        /*margin: 0 calc(200 * ((100vw - 320px) / (1280 - 320)));*/
+    }
+}
+
+    @media screen and (max-width:1024px) {
+        .page-container {
+            padding: 0 120px;
+        }
 }

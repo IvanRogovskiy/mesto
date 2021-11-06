@@ -5,3 +5,31 @@
     align-items: center;
     justify-content: space-between;
 }
+
+@media screen and (max-width:900px) {
+    .profile {
+        display: grid;
+        grid-template-areas:
+     "profile__info-name-container"
+     "profile__info-rank profile__add-button";
+    }
+}
+
+@media screen and (max-width:770px) {
+    .profile {
+        grid-template-areas:
+        "profile__info-name-container"
+        "profile__info-rank"
+        "profile__add-button";
+        row-gap: 25px;
+
+    }
+}
+
+/*@media screen and (max-width:770px) {*/
+/*    .profile {*/
+/*        display: flex;*/
+/*        flex-direction: column;*/
+/*        padding-bottom: 68px;*/
+/*    }*/
+/*}*/

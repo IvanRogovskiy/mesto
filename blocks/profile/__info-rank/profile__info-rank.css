@@ -1,4 +1,5 @@
 .profile__info-rank {
+    grid-area: profile__info-rank;
     font-size: 18px;
     font-weight: normal;
     line-height: 22px;

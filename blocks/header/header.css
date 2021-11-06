@@ -1,6 +1,8 @@
 .header {
     padding-top: 45px;
     height: 74px;
-    width: 880px;
+    /*max-width: 880px;*/
+    /*min-width: 320px;*/
+    /*width: 100%;*/
     border-bottom: 1px rgba(84, 84, 84, .7) solid;
 }
