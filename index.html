@@ -8,7 +8,19 @@
 </head>
 <body class="page">
 <div class="popup">
-    <div class="popup__container"></div>
+    <form class="popup__container">
+        <div class="popup__container-content">
+            <h2 class="popup__container-title">Редактировать профиль</h2>
+            <fieldset class="popup__input-container">
+                    <input class="popup__container-input-item" name="name" type="text" id="name" value="Иван Роговский">
+                <label for="rank">
+                    <input class="popup__container-input-item" name="rank" id="rank" value="Начинающий путешественник">
+                </label>
+            </fieldset>
+            <input type="submit" class="popup__container-save" value="Сохранить">
+        </div>
+
+    </form>
 </div>
     <div class="page-container">
         <header class="header">
