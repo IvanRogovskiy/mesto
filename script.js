@@ -1,9 +1,12 @@
 const addButton = document.querySelector('.profile__info-edit-button');
 const editModal = document.querySelector('.popup');
+const closeButton = document.querySelector('.popup__container-close');
 
 
-function editProfile() {
-    editModal.classList.add('popup_opened')
+function toggleEditProfileModal() {
+    editModal.classList.toggle('popup_opened')
 }
 
-addButton.addEventListener('click', editProfile);
+
+addButton.addEventListener('click', toggleEditProfileModal);
+closeButton.addEventListener('click', toggleEditProfileModal);
