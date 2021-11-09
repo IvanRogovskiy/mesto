@@ -9,3 +9,18 @@
     opacity: .6;
     cursor: pointer;
 }
+
+@media screen and (max-width:540px) {
+    .popup__container-close {
+        right: 0;
+        height: 25px;
+        width: 25px;
+    }
+}
+
+@media screen and (max-width:380px) {
+    .popup__container-close {
+        height: 22px;
+        width: 22px;
+    }
+}
