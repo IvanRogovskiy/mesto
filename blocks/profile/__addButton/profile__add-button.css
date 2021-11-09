@@ -19,8 +19,7 @@
 
 @media screen and (max-width:950px) {
     .profile__add-button {
-        width: 90px;
-        height: 35px;
+        width: 170px;
         grid-row: 1/2;
         align-self: end;
     }
@@ -36,7 +35,7 @@
     .profile__add-button {
         grid-row: 2/3;
         justify-self: center;
-        width: 130px;
+        width: 200px;
         height: 45px;
     }
 }

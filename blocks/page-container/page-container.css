@@ -54,8 +54,8 @@
 
 @media screen and (max-width:400px) {
     .page-container {
-        padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) - 15px);
-        padding-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) - 15px);
+        padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));
+        padding-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));
     }
 }
 
