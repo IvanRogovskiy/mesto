@@ -1,8 +1,8 @@
 const editProfilePopup = document.querySelector('.popup');
 const closePopupButton = document.querySelector('.popup__container-close');
 const editProfileButton = document.querySelector('.profile__info-edit-button');
-const favPlaceButton = document.querySelector('.place__fav');
-const favPlaceButtonClicked = document.querySelector('.place__fav-clicked');
+const favPlaceButton = document.querySelectorAll('.place__fav');
+const favPlaceButtonClicked = document.querySelectorAll('.place__fav-clicked');
 
 const currentName = document.querySelector('.profile__info-name');
 const currentRank = document.querySelector('.profile__info-rank');
@@ -35,17 +35,18 @@ function updateRank(e) {
     popupInputRank.setAttribute('value', e.target.value);
 }
 
-function makeFav() {
-    favPlaceButtonClicked.style.display = 'inline';
-    favPlaceButton.style.display = 'none';
-}
-
-function handleFavourite() {
-    if (favPlaceButtonClicked.style.display === 'none') {
-        makeFav()
-    } else {
-        favPlaceButton.style.display = 'inline';
-        favPlaceButtonClicked.style.display = 'none';
+function handleFavourite(e) {
+    let targetElement = e.target;
+    let targetElementIndex = targetElement.index;
+    console.log(targetElement)
+    console.log(window.getComputedStyle(targetElement).display)
+    if (window.getComputedStyle(targetElement).display === 'block' && targetElement === favPlaceButton[targetElementIndex]) {
+        targetElement.style.display = 'none';
+        favPlaceButtonClicked[targetElementIndex].style.display = 'block'
+    }
+    if (window.getComputedStyle(targetElement).display === 'block' && targetElement === favPlaceButtonClicked[targetElementIndex]) {
+        targetElement.style.display = 'none';
+        favPlaceButton[targetElementIndex].style.display = 'block'
     }
 }
 
@@ -57,7 +58,14 @@ popupInputRank.addEventListener('change', updateRank);
 
 editProfilePopup.addEventListener('submit', saveNewProfileInfo);
 
-favPlaceButton.addEventListener('click', handleFavourite);
-favPlaceButtonClicked.addEventListener('click', handleFavourite);
+for ( let i = 0; i < favPlaceButton.length; i++) {
+    favPlaceButton[i].index = i;
+    favPlaceButton[i].addEventListener('click', handleFavourite);
+}
+
+for ( let i = 0; i < favPlaceButtonClicked.length; i++) {
+    favPlaceButtonClicked[i].index = i;
+    favPlaceButtonClicked[i].addEventListener('click', handleFavourite);
+}
 
 initiateProfileInfo();

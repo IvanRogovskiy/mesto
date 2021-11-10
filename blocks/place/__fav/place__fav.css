@@ -1,5 +1,6 @@
 .place__fav {
     transition: opacity .3s;
+    display: inline;
 }
 
 .place__fav:hover {
