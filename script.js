@@ -2,6 +2,7 @@ const editProfilePopup = document.querySelector('.popup');
 const closePopupButton = document.querySelector('.popup__container-close');
 const editProfileButton = document.querySelector('.profile__info-edit-button');
 const favPlaceButton = document.querySelector('.place__fav');
+const favPlaceButtonClicked = document.querySelector('.place__fav-clicked');
 
 const currentName = document.querySelector('.profile__info-name');
 const currentRank = document.querySelector('.profile__info-rank');
@@ -34,9 +35,18 @@ function updateRank(e) {
     popupInputRank.setAttribute('value', e.target.value);
 }
 
-function markAsFavourite() {
-    favPlaceButton.setAttribute('fill', "red");
+function makeFav() {
+    favPlaceButtonClicked.style.display = 'inline';
+    favPlaceButton.style.display = 'none';
+}
 
+function handleFavourite() {
+    if (favPlaceButtonClicked.style.display === 'none') {
+        makeFav()
+    } else {
+        favPlaceButton.style.display = 'inline';
+        favPlaceButtonClicked.style.display = 'none';
+    }
 }
 
 editProfileButton.addEventListener('click', toggleEditProfileModal);
@@ -47,6 +57,7 @@ popupInputRank.addEventListener('change', updateRank);
 
 editProfilePopup.addEventListener('submit', saveNewProfileInfo);
 
-favPlaceButton.addEventListener('click', markAsFavourite);
+favPlaceButton.addEventListener('click', handleFavourite);
+favPlaceButtonClicked.addEventListener('click', handleFavourite);
 
 initiateProfileInfo();
