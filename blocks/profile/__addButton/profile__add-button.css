@@ -19,9 +19,9 @@
 
 @media screen and (max-width:950px) {
     .profile__add-button {
-        width: 170px;
-        grid-row: 1/2;
-        align-self: end;
+        width: 220px;
+        /*grid-row: 1/2;*/
+        justify-self: center;
     }
 }
 

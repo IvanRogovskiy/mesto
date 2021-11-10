@@ -1,7 +1,6 @@
 .page-container {
     width: 100%;
     max-width: 880px;
-    min-width: 282px;
     padding-left: 200px;
     padding-right: 200px;
     /*margin: 0 auto;*/
@@ -24,40 +23,40 @@
 /*    }*/
 /*}*/
 
-@media screen and (max-width:1024px) {
-    .page-container {
-        padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));
-        padding-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));
-    }
-}
+/*@media screen and (max-width:1024px) {*/
+/*    .page-container {*/
+/*        padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));*/
+/*        padding-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));*/
+/*    }*/
+/*}*/
 
-@media screen and (max-width:660px) {
-    .page-container {
-        padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) + 10%);
-        padding-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) + 10%);
-    }
-}
+/*@media screen and (max-width:660px) {*/
+/*    .page-container {*/
+/*        padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) + 10%);*/
+/*        padding-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) + 10%);*/
+/*    }*/
+/*}*/
 
-@media screen and (max-width:570px) {
-    .page-container {
-        padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) + 40px);
-        padding-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) + 40px);
-    }
-}
+/*@media screen and (max-width:570px) {*/
+/*    .page-container {*/
+/*        padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) + 40px);*/
+/*        padding-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) + 40px);*/
+/*    }*/
+/*}*/
 
-@media screen and (max-width:490px) {
-    .page-container {
-        padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) + 20px);
-        padding-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) + 20px);
-    }
-}
+/*@media screen and (max-width:490px) {*/
+/*    .page-container {*/
+/*        padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) + 20px);*/
+/*        padding-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)) + 20px);*/
+/*    }*/
+/*}*/
 
-@media screen and (max-width:400px) {
-    .page-container {
-        padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));
-        padding-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));
-    }
-}
+/*@media screen and (max-width:400px) {*/
+/*    .page-container {*/
+/*        padding-left: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));*/
+/*        padding-right: calc(19px + (200 - 19) * ((100vw - 320px) / (1280 - 320)));*/
+/*    }*/
+/*}*/
 
 @media screen and (max-width:320px) {
     .page-container {

@@ -1,12 +1,12 @@
 .profile {
     padding-top: 40px;
-    max-height: 120px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    grid-template-columns: 1fr;
 }
 
-@media screen and (max-width:900px) {
+@media screen and (max-width:950px) {
     .profile {
         display: grid;
         grid-template-areas:
@@ -15,7 +15,7 @@
     }
 }
 
-@media screen and (max-width:770px) {
+@media screen and (max-width:950px) {
     .profile {
         grid-template-areas:
         "profile__info-name-container"
@@ -26,12 +26,12 @@
     }
 }
 
-@media screen and (max-width:570px) {
-    .profile {
-        grid-template-columns: 320px;
+/*@media screen and (max-width:570px) {*/
+/*    .profile {*/
+/*        grid-template-columns: 320px;*/
 
-    }
-}
+/*    }*/
+/*}*/
 
 @media screen and (max-width:470px) {
     .profile {
