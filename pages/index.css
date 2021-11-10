@@ -18,7 +18,8 @@
 @import url(../blocks/profile/__info-name/profile__info-name.css);
 @import url(../blocks/profile/__info-rank/profile__info-rank.css);
 @import url(../blocks/profile/__info-edit/profile__info-edit-button.css);
-@import url(../blocks/profile/__addButton/profile__add-button.css);
+@import url(../blocks/profile/__add-button-icon/profile__add-button-icon.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
 
 @import url(../blocks/places/places.css);
 @import url(../blocks/place/place.css);
