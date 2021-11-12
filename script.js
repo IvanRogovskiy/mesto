@@ -38,8 +38,6 @@ function updateRank(e) {
 function handleFavourite(e) {
     let targetElement = e.target;
     let targetElementIndex = targetElement.index;
-    console.log(targetElement)
-    console.log(window.getComputedStyle(targetElement).display)
     if (window.getComputedStyle(targetElement).display === 'block' && targetElement === favPlaceButton[targetElementIndex]) {
         targetElement.style.display = 'none';
         favPlaceButtonClicked[targetElementIndex].style.display = 'block'
