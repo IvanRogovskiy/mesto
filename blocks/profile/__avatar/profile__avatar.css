@@ -4,16 +4,16 @@
     width: 120px;
 }
 
-@media screen and (max-width:570px) {
-    .profile__avatar {
-        height: 90px;
-        width: 90px;
-    }
-}
-
 @media screen and (max-width:480px) {
     .profile__avatar {
         height: 120px;
         width: 120px;
+    }
+}
+
+@media screen and (max-width:570px) {
+    .profile__avatar {
+        height: 90px;
+        width: 90px;
     }
 }

@@ -20,12 +20,12 @@
     height: 50px;
     border: 2px solid #FFFFFF;
     border-radius: 2px;
-
 }
 
-/*.profile__add-button {*/
-/*    justify-self: center;*/
-/*}*/
+.profile__add-button:hover {
+    opacity: .6;
+    cursor: pointer;
+}
 
 @media screen and (max-width:950px) {
     .profile__add-button {

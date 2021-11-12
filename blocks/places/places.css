@@ -24,17 +24,3 @@
         padding-top: 11px;
     }
 }
-
-/*@media screen and (max-width:470px) {*/
-/*    .places {*/
-/*        grid-template-columns: 282px;*/
-/*    }*/
-/*}*/
-
-/*@media screen and (max-width:570px) {*/
-/*    .places {*/
-/*        padding-top: 130px;*/
-/*        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));*/
-
-/*    }*/
-/*}*/
