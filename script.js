@@ -22,37 +22,39 @@ function initiateProfileInfo() {
 
 function saveNewProfileInfo(event) {
     event.preventDefault();
-    currentName.textContent = popupInputName.getAttribute('value');
-    currentRank.textContent = popupInputRank.getAttribute('value');
+    currentName.textContent = popupInputName.value;
+    currentRank.textContent = popupInputRank.value;
     toggleEditProfileModal();
 }
 
-function updateName(e) {
-    popupInputName.setAttribute('value', e.target.value);
-}
 
-function updateRank(e) {
-    popupInputRank.setAttribute('value', e.target.value);
-}
 
-function handleFavourite(e) {
-    let targetElement = e.target;
-    let targetElementIndex = targetElement.index;
-    if (window.getComputedStyle(targetElement).display === 'block' && targetElement === favPlaceButton[targetElementIndex]) {
-        targetElement.style.display = 'none';
-        favPlaceButtonClicked[targetElementIndex].style.display = 'block'
-    }
-    if (window.getComputedStyle(targetElement).display === 'block' && targetElement === favPlaceButtonClicked[targetElementIndex]) {
-        targetElement.style.display = 'none';
-        favPlaceButton[targetElementIndex].style.display = 'block'
-    }
-}
+// function updateRank(e) {
+//     popupInputRank.setAttribute('value', e.target.value);
+// }
+
+// function handleFavourite(e) {
+//     let targetElement = e.target;
+//     let targetElementIndex = targetElement.index;
+//     if (window.getComputedStyle(targetElement).display === 'block' && targetElement === favPlaceButton[targetElementIndex]) {
+//         targetElement.style.display = 'none';
+//         favPlaceButtonClicked[targetElementIndex].style.display = 'block'
+//     }
+//     if (window.getComputedStyle(targetElement).display === 'block' && targetElement === favPlaceButtonClicked[targetElementIndex]) {
+//         targetElement.style.display = 'none';
+//         favPlaceButton[targetElementIndex].style.display = 'block'
+//     }
+// }
 
 editProfileButton.addEventListener('click', toggleEditProfileModal);
 closePopupButton.addEventListener('click', toggleEditProfileModal);
 
-popupInputName.addEventListener('change', updateName);
-popupInputRank.addEventListener('change', updateRank);
+// function updateName(e) {
+//     popupInputName.setAttribute('value', e.target.value);
+// }
+
+// popupInputName.addEventListener('change', updateName);
+// popupInputRank.addEventListener('change', updateRank);
 
 editProfilePopup.addEventListener('submit', saveNewProfileInfo);
 

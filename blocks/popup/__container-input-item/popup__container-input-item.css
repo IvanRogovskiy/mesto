@@ -12,3 +12,9 @@
 .popup__container-input-item[name="rank"] {
     margin-bottom: 0;
 }
+
+@media screen and (max-width:320px) {
+    .popup__container-input-item {
+     margin-bottom: 25px;
+    }
+}
