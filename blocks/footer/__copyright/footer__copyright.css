@@ -4,5 +4,11 @@
     line-height: 22px;
     font-weight: normal;
     margin: 0;
+}
 
+@media screen and (max-width:330px) {
+    .footer__copyright {
+        font-size: 14px;
+        line-height: 17px;
+    }
 }

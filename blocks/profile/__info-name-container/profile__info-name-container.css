@@ -30,3 +30,12 @@
         width: 220px;
     }
 }
+
+@media screen and (max-width:330px) {
+    .profile__info-name-container {
+        margin-bottom: 0;
+        width: 238px;
+        margin-left: 40px;
+
+    }
+}

@@ -13,12 +13,6 @@
     }
 }
 
-@media screen and (max-width:570px) {
-    .profile__info-rank {
-        font-size: 16px;
-    }
-}
-
 @media screen and (max-width:330px) {
     .profile__info-rank {
         font-size: 14px;

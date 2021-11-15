@@ -8,15 +8,6 @@
 
 @media screen and (max-width:950px) {
     .profile {
-        display: grid;
-        grid-template-areas:
-     "profile__info-name-container"
-     "profile__info-rank profile__add-button";
-    }
-}
-
-@media screen and (max-width:950px) {
-    .profile {
         grid-template-areas:
         "profile__info-name-container"
         "profile__info-rank"
@@ -25,13 +16,6 @@
 
     }
 }
-
-/*@media screen and (max-width:570px) {*/
-/*    .profile {*/
-/*        grid-template-columns: 320px;*/
-
-/*    }*/
-/*}*/
 
 @media screen and (max-width:470px) {
     .profile {
