@@ -1,6 +1,18 @@
 .place__fav {
     transition: opacity .3s;
     display: inline;
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #26589F;
+    list-style: none outside none;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0;
+    margin: 0 0 0;
+    height: 19px;
+    width: 22px;
+;
 }
 
 .place__fav:hover {
