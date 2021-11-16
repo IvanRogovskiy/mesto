@@ -3,38 +3,38 @@
     margin: 0 0 16px;
     align-items: center;
     grid-area: profile__info-name-container;
-    width: 400px;
+    max-width: 400px;
 }
 
 @media screen and (max-width:1024px) {
     .profile__info-name-container {
-        width: 305px;
+        max-width: 305px;
     }
 }
 
 @media screen and (max-width:820px) {
     .profile__info-name-container {
-        width: 275px;
+        max-width: 275px;
     }
 }
 
 
 @media screen and (max-width:620px) {
     .profile__info-name-container {
-        width: 245px;
+        max-width: 245px;
     }
 }
 
 @media screen and (max-width:480px) {
     .profile__info-name-container {
-        width: 220px;
+        max-width: 220px;
     }
 }
 
 @media screen and (max-width:330px) {
     .profile__info-name-container {
         margin-bottom: 0;
-        width: 238px;
+        max-width: 238px;
         margin-left: 40px;
 
     }
