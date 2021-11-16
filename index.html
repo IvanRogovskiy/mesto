@@ -1,106 +1,100 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Mesto</title>
-    <link rel="stylesheet" href="pages/index.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body class="page">
-<div class="popup">
-    <form class="popup__container">
-        <div class="popup__container-content">
-            <h2 class="popup__container-title">Редактировать профиль</h2>
-            <fieldset class="popup__input-container">
-                <label for="name">
-                    <input class="popup__container-input-item" name="name" type="text" id="name" value="Иван Роговский">
-                </label>
-                <label for="rank">
-                    <input class="popup__container-input-item" name="rank" id="rank" value="Начинающий путешественник">
-                </label>
-            </fieldset>
-            <input type="submit" class="popup__container-save" value="Сохранить">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Mesto</title>
+        <link rel="stylesheet" href="pages/index.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body class="page">
+        <div class="popup">
+            <img src="images/container-close.svg" alt="Крестик закрытия модального окна" class="popup__container-close"/>
+            <form class="popup__container">
+                    <h2 class="popup__container-title">Редактировать профиль</h2>
+                    <fieldset class="popup__input-container">
+                        <input class="popup__container-input-item" name="name" type="text" id="name" value="Иван Роговский"/>
+                        <input class="popup__container-input-item" name="rank" id="rank" value="Начинающий путешественник"/>
+                    </fieldset>
+                    <input type="submit" class="popup__container-save" value="Сохранить"/>
+            </form>
         </div>
-        <img src="images/container-close.svg" alt="Крестик закрытия модального окна" class="popup__container-close">
-    </form>
-</div>
-    <div class="page-container">
-        <header class="header">
-            <img src="images/header-logo.svg" alt="Логотип в виде надписи MESTO" class="header__logo">
-        </header>
-        <main class="main">
-            <section class="profile">
-                <div class="profile__info-container">
-                    <img src="images/profile-avatar.png" alt="Картинка профиля" class="profile__avatar">
-                    <div class="profile__info">
-                        <div class="profile__info-name-container">
-                            <h1 class="profile__info-name">Жак-Ив Кусто</h1>
-                            <button class="profile__info-edit-button">
-                                <img class="profile__info-edit-button-icon" src="images/profile-edit-button.svg" alt="Кнопка редактирования профиля"/>
-                            </button>
+        <div class="page-container">
+            <header class="header">
+                <img src="images/header-logo.svg" alt="Логотип в виде надписи MESTO" class="header__logo" />
+            </header>
+            <main class="main">
+                <section class="profile">
+                    <div class="profile__info-container">
+                        <img src="images/profile-avatar.png" alt="Картинка профиля" class="profile__avatar" />
+                        <div class="profile__info">
+                            <div class="profile__info-name-container">
+                                <h1 class="profile__info-name">Жак-Ив Кусто</h1>
+                                <button class="profile__info-edit-button">
+                                    <img class="profile__info-edit-button-icon" src="images/profile-edit-button.svg" alt="Кнопка редактирования профиля" />
+                                </button>
+                            </div>
+                            <p class="profile__info-rank">Космонавт</p>
                         </div>
-                        <p class="profile__info-rank">Космонавт</p>
                     </div>
-                </div>
-                <button type="button" class="profile__add-button">
-                    <img src="images/profile-add-button.svg" alt="Кнопка для добавления места" class="profile__add-button-icon">
-                </button>
+                    <button type="button" class="profile__add-button">
+                        <img src="images/profile-add-button.svg" alt="Кнопка для добавления места" class="profile__add-button-icon" />
+                    </button>
                 </section>
-            <section class="places">
-                <div class="place">
-                    <img src="images/place-photo-karachaevsk.jpg" alt="Фото крепости" class="place__image">
-                    <div class="place__info">
-                        <h2 class="place__name">Карачаевск</h2>
-                        <img src="images/place-fav.svg" alt="" class="place__fav">
-                        <img src="images/place-fav_filled.svg" alt="" class="place__fav-clicked">
+                <section class="places">
+                    <div class="place">
+                        <img src="images/place-photo-karachaevsk.jpg" alt="Фото крепости" class="place__image" />
+                        <div class="place__info">
+                            <h2 class="place__name">Карачаевск</h2>
+                            <img src="images/place-fav.svg" alt="" class="place__fav" />
+                            <img src="images/place-fav_filled.svg" alt="" class="place__fav-clicked" />
+                        </div>
                     </div>
-                </div>
-                <div class="place">
-                    <img src="images/place-photo-elbrus.jpg" alt="Фото крепости" class="place__image">
-                    <div class="place__info">
-                        <h2 class="place__name">Гора Эльбрус</h2>
-                        <img src="images/place-fav.svg" alt="" class="place__fav">
-                        <img src="images/place-fav_filled.svg" alt="" class="place__fav-clicked">
+                    <div class="place">
+                        <img src="images/place-photo-elbrus.jpg" alt="Фото крепости" class="place__image" />
+                        <div class="place__info">
+                            <h2 class="place__name">Гора Эльбрус</h2>
+                            <img src="images/place-fav.svg" alt="" class="place__fav" />
+                            <img src="images/place-fav_filled.svg" alt="" class="place__fav-clicked" />
+                        </div>
                     </div>
-                </div>
-                <div class="place">
-                    <img src="images/place-photo-dombay.jpg" alt="Фото крепости" class="place__image">
-                    <div class="place__info">
-                        <h2 class="place__name">Домбай</h2>
-                        <img src="images/place-fav.svg" alt="" class="place__fav">
-                        <img src="images/place-fav_filled.svg" alt="" class="place__fav-clicked">
+                    <div class="place">
+                        <img src="images/place-photo-dombay.jpg" alt="Фото крепости" class="place__image" />
+                        <div class="place__info">
+                            <h2 class="place__name">Домбай</h2>
+                            <img src="images/place-fav.svg" alt="" class="place__fav" />
+                            <img src="images/place-fav_filled.svg" alt="" class="place__fav-clicked" />
+                        </div>
                     </div>
-                </div>
-                <div class="place">
-                    <img src="images/place-photo-elbrus.jpg" alt="Фото крепости" class="place__image">
-                    <div class="place__info">
-                        <h2 class="place__name">Гора Эльбрус</h2>
-                        <img src="images/place-fav.svg" alt="" class="place__fav">
-                        <img src="images/place-fav_filled.svg" alt="" class="place__fav-clicked">
+                    <div class="place">
+                        <img src="images/place-photo-elbrus.jpg" alt="Фото крепости" class="place__image" />
+                        <div class="place__info">
+                            <h2 class="place__name">Гора Эльбрус</h2>
+                            <img src="images/place-fav.svg" alt="" class="place__fav" />
+                            <img src="images/place-fav_filled.svg" alt="" class="place__fav-clicked" />
+                        </div>
                     </div>
-                </div>
-                <div class="place">
-                    <img src="images/place-photo-dombay.jpg" alt="Фото крепости" class="place__image">
-                    <div class="place__info">
-                        <h2 class="place__name">Домбай</h2>
-                        <img src="images/place-fav.svg" alt="" class="place__fav">
-                        <img src="images/place-fav_filled.svg" alt="" class="place__fav-clicked">
+                    <div class="place">
+                        <img src="images/place-photo-dombay.jpg" alt="Фото крепости" class="place__image" />
+                        <div class="place__info">
+                            <h2 class="place__name">Домбай</h2>
+                            <img src="images/place-fav.svg" alt="" class="place__fav" />
+                            <img src="images/place-fav_filled.svg" alt="" class="place__fav-clicked" />
+                        </div>
                     </div>
-                </div>
-                <div class="place">
-                    <img src="images/place-photo-karachaevsk.jpg" alt="Фото крепости" class="place__image">
-                    <div class="place__info">
-                        <h2 class="place__name">Карачаево-Черкессия</h2>
-                        <img src="images/place-fav.svg" alt="" class="place__fav">
-                        <img src="images/place-fav_filled.svg" alt="" class="place__fav-clicked">
+                    <div class="place">
+                        <img src="images/place-photo-karachaevsk.jpg" alt="Фото крепости" class="place__image" />
+                        <div class="place__info">
+                            <h2 class="place__name">Карачаево-Черкессия</h2>
+                            <img src="images/place-fav.svg" alt="" class="place__fav" />
+                            <img src="images/place-fav_filled.svg" alt="" class="place__fav-clicked" />
+                        </div>
                     </div>
-                </div>
-            </section>
-        </main>
-        <footer class="footer">
-            <p class="footer__copyright">&copy;2021 Mesto Russia.</p>
-        </footer>
-    </div>
-    <script src="js/script.js"></script>
-</body>
+                </section>
+            </main>
+            <footer class="footer">
+                <p class="footer__copyright">&copy;2021 Mesto Russia.</p>
+            </footer>
+        </div>
+        <script src="js/script.js"></script>
+    </body>
 </html>

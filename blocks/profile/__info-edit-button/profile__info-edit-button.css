@@ -1,26 +1,24 @@
 .profile__info-edit-button {
     background: none repeat scroll 0 0 transparent;
     border: medium none;
-    border-spacing: 0;
     color: #26589F;
     font-family: 'PT Sans Narrow',sans-serif;
     font-size: 16px;
     font-weight: normal;
     line-height: 1.42rem;
     list-style: none outside none;
-    margin: 0;
     padding: 0;
     text-align: left;
     text-decoration: none;
     text-indent: 0;
     height: 24px;
     width: 24px;
-    margin-left: 18px;
+    margin: 0 0 0 18px;
     transition: opacity .3s;
 }
 
 .profile__info-edit-button:hover {
-    opacity: .5;
+    opacity: .6;
     cursor: pointer;
 }
 
