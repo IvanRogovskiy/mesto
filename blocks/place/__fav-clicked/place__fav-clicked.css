@@ -1,9 +1,0 @@
-.place__fav-clicked {
-    display: none;
-    transition: opacity .3s;
-}
-
-.place__fav-clicked:hover {
-    opacity: .6;
-    cursor: pointer;
-}

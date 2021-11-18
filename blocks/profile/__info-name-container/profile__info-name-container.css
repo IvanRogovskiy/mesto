@@ -8,13 +8,13 @@
 
 @media screen and (max-width:1024px) {
     .profile__info-name-container {
-        max-width: 305px;
+        max-width: 360px;
     }
 }
 
 @media screen and (max-width:820px) {
     .profile__info-name-container {
-        max-width: 275px;
+        max-width: 300px;
     }
 }
 
@@ -37,6 +37,5 @@
         max-width: 238px;
         margin-left: 25px;
         margin-top: 5px;
-
     }
 }

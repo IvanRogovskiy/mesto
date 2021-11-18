@@ -1,6 +1,6 @@
 const editProfilePopup = document.querySelector('.popup');
 const closePopupButton = document.querySelector('.popup__container-close');
-const editProfileButton = document.querySelector('.profile__info-edit-button');
+const editProfileForm = document.querySelector('.profile__info-edit-button');
 
 const currentName = document.querySelector('.profile__info-name');
 const currentRank = document.querySelector('.profile__info-rank');
@@ -25,6 +25,6 @@ function saveNewProfileInfo(event) {
     closeModal();
 }
 
-editProfileButton.addEventListener('click', openModal);
+editProfileForm.addEventListener('click', openModal);
 closePopupButton.addEventListener('click', closeModal);
 editProfilePopup.addEventListener('submit', saveNewProfileInfo);
