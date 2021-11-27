@@ -29,6 +29,7 @@ const editProfilePopup = document.querySelector('.popup');
 const editProfileForm = document.querySelector('form[name="edit-profile"]');
 const closePopupButton = document.querySelector('.popup__container-close');
 const editProfileButton = document.querySelector('.profile__info-edit-button');
+const addPlaceCardButton = document.querySelector('.profile__add-button');
 
 const currentName = document.querySelector('.profile__info-name');
 const currentRank = document.querySelector('.profile__info-rank');
@@ -42,7 +43,8 @@ const popupInputRank = editProfileForm.querySelector('.popup__container-input-it
 function initiateApp(initialCards) {
     initialCards.forEach(item => {
         createCard(item.name, item.link)
-    })
+    });
+
 }
 
 //берет темплейт карточки, копирует его. Сетим тайтл и линк из аргументов, вешаем лисенеры и пушим элемент в контейнер
@@ -54,8 +56,7 @@ function createCard(title, imageLink) {
     placeCardElement.querySelector('.place__delete').addEventListener('click', (evt) => {
         const parentCard = evt.target.closest('.place');
         parentCard.remove();
-    })
-
+    });
     const cardsContainer = document.querySelector('.places')
     placeImage.src = imageLink;
     placeTitle.textContent = title;
@@ -71,7 +72,7 @@ function showCardPicture() {
 
 }
 
-function openModal() {
+function openModal(modalType) {
     popupInputName.value = currentName.textContent;
     popupInputRank.value = currentRank.textContent;
     editProfilePopup.classList.add('popup_opened')
