@@ -51,6 +51,11 @@ function createCard(title, imageLink) {
     const placeCardElement = placeTemplate.querySelector('.place').cloneNode(true);
     const placeImage = placeCardElement.querySelector('.place__image');
     const placeTitle = placeCardElement.querySelector('.place__name');
+    placeCardElement.querySelector('.place__delete').addEventListener('click', (evt) => {
+        const parentCard = evt.target.closest('.place');
+        parentCard.remove();
+    })
+
     const cardsContainer = document.querySelector('.places')
     placeImage.src = imageLink;
     placeTitle.textContent = title;
