@@ -30,60 +30,60 @@
                     </button>
                 </section>
                 <section class="places">
-                    <div class="place">
-                        <img src="images/place-photo-karachaevsk.jpg" alt="Фото крепости" class="place__image" />
-                        <div class="place__info">
-                            <h2 class="place__name">Карачаевск</h2>
-                            <button type="button" class="place__fav">
-                                <img src="images/place-fav.svg" alt="Кнопка лайка места"/>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="place">
-                        <img src="images/place-photo-elbrus.jpg" alt="Фото крепости" class="place__image" />
-                        <div class="place__info">
-                            <h2 class="place__name">Гора Эльбрус</h2>
-                            <button type="button" class="place__fav">
-                                <img src="images/place-fav.svg" alt="Кнопка лайка места"/>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="place">
-                        <img src="images/place-photo-dombay.jpg" alt="Фото крепости" class="place__image" />
-                        <div class="place__info">
-                            <h2 class="place__name">Домбай</h2>
-                            <button type="button" class="place__fav">
-                                <img src="images/place-fav.svg" alt="Кнопка лайка места"/>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="place">
-                        <img src="images/place-photo-elbrus.jpg" alt="Фото крепости" class="place__image" />
-                        <div class="place__info">
-                            <h2 class="place__name">Гора Эльбрус</h2>
-                            <button type="button" class="place__fav">
-                                <img src="images/place-fav.svg" alt="Кнопка лайка места"/>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="place">
-                        <img src="images/place-photo-dombay.jpg" alt="Фото крепости" class="place__image" />
-                        <div class="place__info">
-                            <h2 class="place__name">Домбай</h2>
-                            <button type="button" class="place__fav">
-                                <img src="images/place-fav.svg" alt="Кнопка лайка места" />
-                            </button>
-                        </div>
-                    </div>
-                    <div class="place">
-                        <img src="images/place-photo-karachaevsk.jpg" alt="Фото крепости" class="place__image" />
-                        <div class="place__info">
-                            <h2 class="place__name">Карачаево-Черкессия</h2>
-                            <button type="button" class="place__fav">
-                                <img src="images/place-fav.svg"  alt="Кнопка лайка места"/>
-                            </button>
-                        </div>
-                    </div>
+<!--                    <div class="place">-->
+<!--                        <img src="images/place-photo-karachaevsk.jpg" alt="Фото крепости" class="place__image" />-->
+<!--                        <div class="place__info">-->
+<!--                            <h2 class="place__name">Карачаевск</h2>-->
+<!--                            <button type="button" class="place__fav">-->
+<!--                                <img src="images/place-fav.svg" alt="Кнопка лайка места"/>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="place">-->
+<!--                        <img src="images/place-photo-elbrus.jpg" alt="Фото крепости" class="place__image" />-->
+<!--                        <div class="place__info">-->
+<!--                            <h2 class="place__name">Гора Эльбрус</h2>-->
+<!--                            <button type="button" class="place__fav">-->
+<!--                                <img src="images/place-fav.svg" alt="Кнопка лайка места"/>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="place">-->
+<!--                        <img src="images/place-photo-dombay.jpg" alt="Фото крепости" class="place__image" />-->
+<!--                        <div class="place__info">-->
+<!--                            <h2 class="place__name">Домбай</h2>-->
+<!--                            <button type="button" class="place__fav">-->
+<!--                                <img src="images/place-fav.svg" alt="Кнопка лайка места"/>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="place">-->
+<!--                        <img src="images/place-photo-elbrus.jpg" alt="Фото крепости" class="place__image" />-->
+<!--                        <div class="place__info">-->
+<!--                            <h2 class="place__name">Гора Эльбрус</h2>-->
+<!--                            <button type="button" class="place__fav">-->
+<!--                                <img src="images/place-fav.svg" alt="Кнопка лайка места"/>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="place">-->
+<!--                        <img src="images/place-photo-dombay.jpg" alt="Фото крепости" class="place__image" />-->
+<!--                        <div class="place__info">-->
+<!--                            <h2 class="place__name">Домбай</h2>-->
+<!--                            <button type="button" class="place__fav">-->
+<!--                                <img src="images/place-fav.svg" alt="Кнопка лайка места" />-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="place">-->
+<!--                        <img src="images/place-photo-karachaevsk.jpg" alt="Фото крепости" class="place__image" />-->
+<!--                        <div class="place__info">-->
+<!--                            <h2 class="place__name">Карачаево-Черкессия</h2>-->
+<!--                            <button type="button" class="place__fav">-->
+<!--                                <img src="images/place-fav.svg"  alt="Кнопка лайка места"/>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </section>
             </main>
             <footer class="footer">
@@ -105,6 +105,17 @@
                 </form>
             </div>
         </div>
+        <template id="place-template">
+            <div class="place">
+                <img src="" alt="" class="place__image" />
+                <div class="place__info">
+                    <h2 class="place__name"></h2>
+                    <button type="button" class="place__fav">
+                        <img src="images/place-fav.svg" alt="Кнопка лайка места"/>
+                    </button>
+                </div>
+            </div>
+        </template>
         <script src="js/script.js"></script>
     </body>
 </html>
