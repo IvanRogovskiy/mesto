@@ -29,6 +29,12 @@
 @import url(../blocks/place/__name/place__name.css);
 @import url(../blocks/place/__image/place__image.css);
 @import url(../blocks/place/__delete/place__delete.css);
+@import url(../blocks/place/__image-full/place__image-full.css);
+@import url(../blocks/place/__image-full-image/place__image-full-image.css);
+@import url(../blocks/place/__image-full-name/place__image-full-name.css);
+@import url(../blocks/place/__image-full-container/place__image-full-container.css);
+@import url(../blocks/place/__image-full-close/place__image-full-close.css);
+@import url(../blocks/place/__image-full-close-icon/place__image-full-close-icon.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);

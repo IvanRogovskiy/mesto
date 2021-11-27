@@ -1,0 +1,38 @@
+.place__image-full-close {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #26589F;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.42rem;
+    list-style: none outside none;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0;
+    height: 24px;
+    width: 24px;
+    margin: 0 0 0;
+    transition: opacity .3s;
+    position: absolute;
+    top: -40px;
+    right: -33px;
+}
+
+.place__image-full-close:hover {
+    opacity: .6;
+    cursor: pointer;
+}
+
+@media screen and (max-width:540px) {
+    .place__image-full-close {
+        left: calc(100vw/2 + 30%);
+    }
+}
+
+@media screen and (max-width:330px) {
+    .place__image-full-close {
+        left: 220px;
+        top: -38px;
+    }
+}

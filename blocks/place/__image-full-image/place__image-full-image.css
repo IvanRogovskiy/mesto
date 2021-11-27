@@ -1,0 +1,21 @@
+.place__image-full-image {
+    justify-content: center;
+    align-items: center;
+    height: calc(42.188vw);
+    width: calc(63.750vw);
+    object-fit: contain;
+}
+
+@media screen and (max-width:768px) {
+    .place__image-full-image {
+        height: calc(58.188vw);
+        width: calc(78.750vw);
+    }
+}
+
+@media screen and (max-width:420px) {
+    .place__image-full-image {
+        width: 240px;
+        height: 299px;
+    }
+}

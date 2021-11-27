@@ -27,7 +27,7 @@ const initialCards = [
 
 const editProfilePopup = document.querySelector('.popup');
 const editProfileForm = document.querySelector('form[name="edit-profile"]');
-const closePopupButton = document.querySelector('.popup__container-close');
+const closePopupButton = document.querySelector('.place__image-full-close');
 const editProfileButton = document.querySelector('.profile__info-edit-button');
 const addPlaceCardButton = document.querySelector('.profile__add-button');
 
@@ -57,6 +57,16 @@ function createCard(title, imageLink) {
         const parentCard = evt.target.closest('.place');
         parentCard.remove();
     });
+    placeImage.addEventListener('click', (evt) => {
+        const placeImageFullContainer = document.querySelector('.place__image-full-container');
+        const placeImageFull = document.querySelector('.place__image-full-image');
+        const placeImageFullName = document.querySelector('.place__image-full-name');
+        placeImageFull.src = evt.target.src;
+        const targetCard = evt.target.closest('.place');
+        placeImageFullName.textContent = targetCard.querySelector('.place__name').textContent;
+        placeImageFullContainer.style.display = 'flex';
+
+    })
     const cardsContainer = document.querySelector('.places')
     placeImage.src = imageLink;
     placeTitle.textContent = title;
