@@ -1,4 +1,4 @@
-.popup__container-save {
+.popup-edit__container-save {
     border: 0;
     background: #000000;
     border-radius: 2px;
@@ -14,13 +14,13 @@
     transition: opacity .3s;
 }
 
-.popup__container-save:hover {
+.popup-edit__container-save:hover {
     opacity: .8;
     cursor: pointer;
 }
 
 @media screen and (max-width:400px) {
-    .popup__container-save {
+    .popup-edit__container-save {
         font-size: 14px;
         height: 46px;
         margin-top: 40px;

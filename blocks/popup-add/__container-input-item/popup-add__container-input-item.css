@@ -1,4 +1,4 @@
-.popup__container-input-item {
+.popup-add__container-input-item {
     border: 0;
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
@@ -9,12 +9,12 @@
     box-sizing: border-box;
 }
 
-.popup__container-input-item:last-of-type {
+.popup-add__container-input-item:last-of-type {
     margin-bottom: 0;
 }
 
 @media screen and (max-width:320px) {
-    .popup__container-input-item {
+    .popup-add__container-input-item {
      margin-bottom: 25px;
     }
 }

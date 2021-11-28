@@ -92,17 +92,32 @@
             </footer>
         </div>
         <div class="popup">
-            <div class="popup__container">
+            <div class="popup-edit__container">
                 <button type="button" class="popup__container-close">
                     <img src="images/container-close.svg" alt="Крестик закрытия модального окна" class="popup__container-close-icon"/>
                 </button>
                 <form name="edit-profile">
-                    <h2 class="popup__container-title">Редактировать профиль</h2>
-                    <fieldset class="popup__input-container">
-                        <input class="popup__container-input-item" name="name" type="text" id="name" value="Иван Роговский"/>
-                        <input class="popup__container-input-item" name="rank" type="text" id="rank" value="Начинающий путешественник"/>
+                    <h2 class="popup-edit__container-title">Редактировать профиль</h2>
+                    <fieldset class="popup-edit__input-container">
+                        <input class="popup-edit__container-input-item" name="name" type="text" id="name" value="Иван Роговский"/>
+                        <input class="popup-edit__container-input-item" name="rank" type="text" id="rank" value="Начинающий путешественник"/>
                     </fieldset>
-                    <input type="submit" class="popup__container-save" value="Сохранить"/>
+                    <input type="submit" class="popup-edit__container-save" value="Сохранить"/>
+                </form>
+            </div>
+        </div>
+        <div class="popup">
+            <div class="popup-add__container">
+                <button type="button" class="popup__container-close">
+                    <img src="images/container-close.svg" alt="Крестик закрытия модального окна" class="popup__container-close-icon"/>
+                </button>
+                <form name="edit-profile">
+                    <h2 class="popup-add__container-title">Новое место</h2>
+                    <fieldset class="popup-add__input-container">
+                        <input class="popup-add__container-input-item" name="title" type="text" id="title" placeholder="Название" value=""/>
+                        <input class="popup-add__container-input-item" name="link" type="text" id="link" placeholder="Ссылка на картинку" value=""/>
+                    </fieldset>
+                    <input type="submit" class="popup-edit__container-save" value="Создать"/>
                 </form>
             </div>
         </div>
@@ -122,30 +137,11 @@
                 <div class="place__info">
                     <h2 class="place__name"></h2>
                     <button type="button" class="place__fav">
-                        <img src="images/place-fav.svg" alt="Кнопка лайка места"/>
                     </button>
                 </div>
                 <img src="images/place-delete.svg" alt="Кнопка удаления карточки" class="place__delete">
             </div>
         </template>
-        <template id="popup-template">
-            <div class="popup">
-                <div class="popup__container">
-                    <button type="button" class="place__image-full-close">
-                        <img src="images/container-close.svg" alt="Крестик закрытия модального окна" class="popup__container-close-icon"/>
-                    </button>
-                    <form name="edit-profile">
-                        <h2 class="popup__container-title"></h2>
-                        <fieldset class="popup__input-container">
-                            <input class="popup__container-input-item" name="name" type="text" id="name" value=""/>
-                            <input class="popup__container-input-item" name="rank" type="text" id="rank" value=""/>
-                        </fieldset>
-                        <input type="submit" class="popup__container-save" value="Сохранить"/>
-                    </form>
-                </div>
-            </div>
-        </template>
-
         <script src="js/script.js"></script>
     </body>
 </html>

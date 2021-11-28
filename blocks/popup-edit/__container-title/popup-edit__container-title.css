@@ -1,4 +1,4 @@
-.popup__container-title {
+.popup-edit__container-title {
     color: #000000;
     font-weight: 900;
     font-size: 24px;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width:480px) {
-    .popup__container-title {
+    .popup-edit__container-title {
         font-size: 18px;
         margin-bottom: 75px;
         line-height: 22px;
