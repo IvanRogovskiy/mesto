@@ -1,5 +1,8 @@
 .profile__info-edit-button {
-    background: none repeat scroll 0 0 transparent;
+    background-color: transparent;
+    background-image: url('/images/profile-edit-button.svg');
+    background-repeat: no-repeat;
+    background-position: center;
     border: medium none;
     color: #26589F;
     font-family: 'PT Sans Narrow',sans-serif;
@@ -32,5 +35,7 @@
 @media screen and (max-width:330px) {
     .profile__info-edit-button {
         margin-left: 14px;
+        height: 18px;
+        width: 18px;
     }
 }

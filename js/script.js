@@ -25,7 +25,8 @@ const initialCards = [
     }
 ];
 
-const editProfilePopup = document.querySelector('.popup');
+const popupEdit = document.querySelector('.popup-edit');
+const popupAdd = document.querySelector('.popup-add');
 const editProfileForm = document.querySelector('form[name="edit-profile"]');
 const closePopupButton = document.querySelector('.popup__container-close');
 const editProfileButton = document.querySelector('.profile__info-edit-button');
@@ -88,7 +89,13 @@ function openModal(evt) {
     if (evt.target === editProfileButton) {
         popupInputName.value = currentName.textContent;
         popupInputRank.value = currentRank.textContent;
-        editProfilePopup.classList.add('popup_opened')
+        closePopupButton.addEventListener('click', closeModal);
+        popupEdit.classList.toggle('popup_opened')
+    }
+
+    if (evt.target === addPlaceCardButton) {
+        closePopupButton.addEventListener('click', closeModal);
+        popupAdd.classList.add('popup_opened')
     }
 
     // if (evt.target === addPlaceCardButton) {
@@ -103,12 +110,12 @@ function openModal(evt) {
     //     rankInput.placeholder = 'Cсылка на картинку';
     //     document.querySelector('.popup-edit-edit__container-save').value = 'Создать'
     // }
-    closePopupButton.addEventListener('click', closeModal);
+
 
 }
 
 function closeModal() {
-    editProfilePopup.classList.remove('popup_opened');
+    popupEdit.classList.remove('popup_opened');
 }
 
 function saveNewProfileInfo(event) {
