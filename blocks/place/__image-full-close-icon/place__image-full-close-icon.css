@@ -10,7 +10,7 @@
     }
 }
 
-@media screen and (max-width:540px) {
+@media screen and (max-width:725px) {
     .place__image-full-close-icon {
         height: 22px;
         width: 22px;

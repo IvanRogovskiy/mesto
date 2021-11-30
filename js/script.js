@@ -27,26 +27,30 @@ const initialCards = [
 
 const popupEdit = document.querySelector('.popup-edit');
 const popupAdd = document.querySelector('.popup-add');
+const addCardForm = document.querySelector('form[name="add-card"]');
 const editProfileForm = document.querySelector('form[name="edit-profile"]');
-const closePopupButton = document.querySelector('.popup__container-close');
+const closeEditPopupButton = document.querySelector('.popup-edit__container-close');
+const closeAddPopupButton = document.querySelector('.popup-add__container-close');
 const editProfileButton = document.querySelector('.profile__info-edit-button');
 const addPlaceCardButton = document.querySelector('.profile__add-button');
 
 const currentName = document.querySelector('.profile__info-name');
 const currentRank = document.querySelector('.profile__info-rank');
 
+const cardTitle = document.querySelector('.popup-add__container-input-item[id="title"]');
+const cardLink = document.querySelector('.popup-add__container-input-item[id="link"]');
+
 const popupInputName = editProfileForm.querySelector('.popup-edit__container-input-item[id="name"]');
 const popupInputRank = editProfileForm.querySelector('.popup-edit__container-input-item[id="rank"]');
 
-//Пробегам по массиву начальных карточек и создаем их
 function initiateApp(initialCards) {
     initialCards.forEach(item => {
         createCard(item.name, item.link)
     });
-
+    editProfileButton.addEventListener('click', openModal);
+    addPlaceCardButton.addEventListener('click', openModal)
 }
 
-//берет темплейт карточки, копирует его. Сетим тайтл и линк из аргументов, вешаем лисенеры и пушим элемент в контейнер
 function createCard(title, imageLink) {
     const placeTemplate = document.querySelector('#place-template').content;
     const placeCardElement = placeTemplate.querySelector('.place').cloneNode(true);
@@ -61,20 +65,18 @@ function createCard(title, imageLink) {
     const cardsContainer = document.querySelector('.places')
     placeImage.src = imageLink;
     placeTitle.textContent = title;
-    cardsContainer.appendChild(placeCardElement);
+    cardsContainer.prepend(placeCardElement);
 }
 
 function handleFavourite(evt) {
     evt.target.classList.toggle('place__fav_liked')
 }
 
-//Получаем по таргету ближайшие элемент и выпиливаем методом ремув
 function removeCard(evt) {
     const parentCard = evt.target.closest('.place');
     parentCard.remove();
 }
 
-//создаем оверлей + картинка карточки (вытащить ссылку из элемента) + плюс надпись (вытащить из элемента)
 function showCardPicture(evt) {
     const placeImageFullContainer = document.querySelector('.place__image-full-container');
     const placeImageFull = document.querySelector('.place__image-full-image');
@@ -89,44 +91,35 @@ function openModal(evt) {
     if (evt.target === editProfileButton) {
         popupInputName.value = currentName.textContent;
         popupInputRank.value = currentRank.textContent;
-        closePopupButton.addEventListener('click', closeModal);
-        popupEdit.classList.toggle('popup_opened')
+        popupEdit.classList.add('popup_opened')
+        editProfileForm.addEventListener('submit', saveNewProfileInfo);
+        closeEditPopupButton.addEventListener('click', () => {
+            popupEdit.classList.remove('popup_opened');
+        });
     }
 
     if (evt.target === addPlaceCardButton) {
-        closePopupButton.addEventListener('click', closeModal);
         popupAdd.classList.add('popup_opened')
+        addCardForm.addEventListener('submit', saveCard);
+        closeAddPopupButton.addEventListener('click', () => {
+            popupAdd.classList.remove('popup_opened');
+        });
     }
-
-    // if (evt.target === addPlaceCardButton) {
-    //     document.querySelector('.popup-edit-edit__container-title').textContent = 'Новое место';
-    //     const nameInput = document.querySelector('input[name="name"]');
-    //     const rankInput = document.querySelector('input[name="rank"]');
-    //     rankInput.name = 'link';
-    //     rankInput.id = 'link';
-    //     rankInput.value = '';
-    //     nameInput.value = '';
-    //     nameInput.placeholder = 'Название';
-    //     rankInput.placeholder = 'Cсылка на картинку';
-    //     document.querySelector('.popup-edit-edit__container-save').value = 'Создать'
-    // }
-
-
-}
-
-function closeModal() {
-    popupEdit.classList.remove('popup_opened');
 }
 
 function saveNewProfileInfo(event) {
     event.preventDefault();
     currentName.textContent = popupInputName.value;
     currentRank.textContent = popupInputRank.value;
-    closeModal();
+    popupEdit.classList.remove('popup_opened');
 }
 
-editProfileButton.addEventListener('click', openModal);
-editProfileForm.addEventListener('submit', saveNewProfileInfo);
-addPlaceCardButton.addEventListener('click', openModal)
+function saveCard(event) {
+    event.preventDefault();
+    const title = cardTitle.value
+    const link = cardLink.value;
+    createCard(title, link);
+    popupAdd.classList.remove('popup_opened');
+}
 
 initiateApp(initialCards);

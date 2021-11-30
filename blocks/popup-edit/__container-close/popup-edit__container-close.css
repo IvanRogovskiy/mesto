@@ -1,4 +1,4 @@
-.popup__container-close {
+.popup-edit__container-close {
     background: none repeat scroll 0 0 transparent;
     border: medium none;
     color: #26589F;
@@ -19,19 +19,19 @@
     right: -31px;
 }
 
-.popup__container-close:hover {
+.popup-edit__container-close:hover {
     opacity: .6;
     cursor: pointer;
 }
 
 @media screen and (max-width:540px) {
-    .popup__container-close {
+    .popup-edit__container-close {
         left: calc(100vw/2 + 40%);
     }
 }
 
 @media screen and (max-width:330px) {
-    .popup__container-close {
+    .popup-edit__container-close {
         left: 242px;
         top: -39px;
     }
