@@ -81,6 +81,9 @@ function showCardPicture(evt) {
     const placeImageFullContainer = document.querySelector('.place__image-full-container');
     const placeImageFull = document.querySelector('.place__image-full-image');
     const placeImageFullName = document.querySelector('.place__image-full-name');
+    placeImageFullContainer.querySelector('.place__image-full-close').addEventListener('click', () => {
+        placeImageFullContainer.style.display = 'none';
+    })
     placeImageFull.src = evt.target.src;
     const targetCard = evt.target.closest('.place');
     placeImageFullName.textContent = targetCard.querySelector('.place__name').textContent;
