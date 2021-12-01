@@ -78,10 +78,10 @@ function removeCard(evt) {
 }
 
 function showCardPicture(evt) {
-    const placeImageFullContainer = document.querySelector('.place__image-full-container');
-    const placeImageFull = document.querySelector('.place__image-full-image');
-    const placeImageFullName = document.querySelector('.place__image-full-name');
-    placeImageFullContainer.querySelector('.place__image-full-close').addEventListener('click', () => {
+    const placeImageFullContainer = document.querySelector('.place-image-full__container');
+    const placeImageFull = document.querySelector('.place-image-full__image');
+    const placeImageFullName = document.querySelector('.place-image-full__name');
+    placeImageFullContainer.querySelector('.place-image-full__close').addEventListener('click', () => {
         placeImageFullContainer.style.display = 'none';
     })
     placeImageFull.src = evt.target.src;
