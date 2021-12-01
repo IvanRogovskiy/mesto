@@ -78,16 +78,16 @@ function removeCard(evt) {
 }
 
 function showCardPicture(evt) {
-    const placeImageFullContainer = document.querySelector('.place-image-full__container');
-    const placeImageFull = document.querySelector('.place-image-full__image');
+    const placeImageFull = document.querySelector('.place-image-full');
+    const placeImageFullImage = document.querySelector('.place-image-full__image');
     const placeImageFullName = document.querySelector('.place-image-full__name');
-    placeImageFullContainer.querySelector('.place-image-full__close').addEventListener('click', () => {
-        placeImageFullContainer.style.display = 'none';
+    placeImageFull.querySelector('.place-image-full__close').addEventListener('click', () => {
+        placeImageFull.style.display = 'none';
     })
-    placeImageFull.src = evt.target.src;
+    placeImageFullImage.src = evt.target.src;
     const targetCard = evt.target.closest('.place');
     placeImageFullName.textContent = targetCard.querySelector('.place__name').textContent;
-    placeImageFullContainer.style.display = 'flex';
+    placeImageFull.style.display = 'flex';
 }
 
 function openModal(evt) {
