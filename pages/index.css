@@ -61,5 +61,6 @@
 @import url(../blocks/popup-add/__container-title/popup-add__container-title.css);
 @import url(../blocks/popup-add/__container-close/popup-add__container-close.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/place-image-full/_opened/place-image-full_opened.css);
 
 
