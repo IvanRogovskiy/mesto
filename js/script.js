@@ -92,38 +92,24 @@ function openModal(evt) {
         popupInputName.value = currentName.textContent;
         popupInputRank.value = currentRank.textContent;
         openPopup(popupEdit)
-        // popupEdit.classList.add('popup_opened')
-        // editProfileForm.addEventListener('submit', saveNewProfileInfo);
     }
     if (evt.target === addPlaceCardButton) {
         openPopup(popupAdd)
-        // openPopup(modal)
-        // popupAdd.classList.add('popup_opened')
-        // addCardForm.addEventListener('submit', saveCard);
-        // closeAddPopupButton.addEventListener('click', () => {
-        //     popupAdd.classList.remove('popup_opened');
-        // });
     }
 }
 
 function openPopup(popup) {
     popup.classList.add('popup_opened')
     if (popup === popupEdit) {
-        // popup.classList.add('popup_opened')
         editProfileForm.addEventListener('submit', saveNewProfileInfo);
     }
     if (popup === popupAdd) {
-        // popupAdd.classList.add('popup_opened')
         addCardForm.addEventListener('submit', saveCard);
-        // closeAddPopupButton.addEventListener('click', () => {
-        //     popupAdd.classList.remove('popup_opened');
-        // });
     }
 }
 
 function closeModal(evt) {
     const eventTarget = evt.target;
-    console.log(eventTarget);
     if (eventTarget === closeEditPopupButton || eventTarget === closeAddPopupButton) {
         eventTarget.closest('div[class*=opened]').classList.toggle('popup_opened');
     }
@@ -144,13 +130,15 @@ function saveCard(event) {
     event.preventDefault();
     const title = cardTitle.value
     const link = cardLink.value;
-    createCard(title, link);
+    addCard(cardsContainer, createCard(title, link));
+    addCardForm.reset();
     popupAdd.classList.remove('popup_opened');
 }
 
 closeFullPopup.addEventListener('click', closeModal);
 closeEditPopupButton.addEventListener('click', closeModal);
 closeAddPopupButton.addEventListener('click', closeModal);
+
 initialCards.forEach(item => {
     addCard(cardsContainer, createCard(item.name, item.link))
 });

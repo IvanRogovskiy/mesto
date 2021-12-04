@@ -35,13 +35,12 @@
         <div class="popup-edit">
             <div class="popup-edit__container">
                 <button type="button" class="popup-edit__container-close">
-<!--                    <img src="images/container-close.svg" alt="Крестик закрытия модального окна" class="popup-edit__container-close-icon"/>-->
                 </button>
                 <form name="edit-profile">
                     <h2 class="popup-edit__container-title">Редактировать профиль</h2>
                     <fieldset class="popup-edit__input-container">
-                        <input class="popup-edit__container-input-item" name="name" type="text" id="name" value="Иван Роговский"/>
-                        <input class="popup-edit__container-input-item" name="rank" type="text" id="rank" value="Начинающий путешественник"/>
+                        <input class="popup-edit__container-input-item" name="name" type="text" placeholder="Имя" id="name" value="Иван Роговский"/>
+                        <input class="popup-edit__container-input-item" name="rank" type="text" id="rank" placeholder="Профессиональная деятельность" value="Начинающий путешественник"/>
                     </fieldset>
                     <input type="submit" class="popup-edit__container-save" value="Сохранить"/>
                 </form>
@@ -49,9 +48,7 @@
         </div>
         <div class="popup-add">
             <div class="popup-add__container">
-                <button type="button" class="popup-add__container-close">
-<!--                    <img src="images/container-close.svg" alt="Крестик закрытия модального окна" class="popup-add__container-close-icon"/>-->
-                </button>
+                <button type="button" class="popup-add__container-close"></button>
                 <form name="add-card">
                     <h2 class="popup-add__container-title">Новое место</h2>
                     <fieldset class="popup-add__input-container">
@@ -66,9 +63,7 @@
             <div class="place-image-full__container">
                 <img alt="Полноразмерная картинка" class="place-image-full__image">
                 <h2 class="place-image-full__name"></h2>
-                <button type="button" class="place-image-full__close">
-<!--                    <img src="images/container-close.svg" alt="Крестик закрытия модального окна" class="place-image-full__close-icon"/>-->
-                </button>
+                <button type="button" class="place-image-full__close"></button>
             </div>
         </div>
         <template id="place-template">
