@@ -69,8 +69,6 @@ function createCard(title, imageLink) {
         placeImageFullName.textContent = targetCard.querySelector('.place__name').textContent;
         openPopup(placeImageFull);
     });
-
-
     return placeCardElement
 }
 
@@ -109,7 +107,7 @@ function saveCard(event) {
     const link = cardLink.value;
     addCard(cardsContainer, createCard(title, link));
     addCardForm.reset();
-    closePopup(popupAdd, closeAddPopupButton);
+    closePopup(popupAdd);
 }
 
 closeFullPopup.addEventListener('click', (evt) => {

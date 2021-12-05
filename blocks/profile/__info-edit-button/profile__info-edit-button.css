@@ -15,7 +15,7 @@
     text-decoration: none;
     text-indent: 0;
     height: 24px;
-    width: 24px;
+    min-width: 24px;
     margin: 0 0 0 18px;
     transition: opacity .3s;
 }
