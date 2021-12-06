@@ -31,38 +31,8 @@
 @import url(../blocks/place/__image/place__image.css);
 @import url(../blocks/place/__delete/place__delete.css);
 
-@import url(../blocks/place-image-full/place-image-full.css);
-@import url(../blocks/place-image-full/__container/place-image-full__container.css);
-@import url(../blocks/place-image-full/__close/place-image-full__close.css);
-@import url(../blocks/place-image-full/__close-icon/place-image-full__close-icon.css);
-@import url(../blocks/place-image-full/__image/place-image-full__image.css);
-@import url(../blocks/place-image-full/__name/place-image-full__name.css);
-
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
-
-@import url(../blocks/popup/popup.css);
-@import url(../blocks/popup-edit/_opened/popup-edit_opened.css);
-@import url(../blocks/popup-edit/__container/popup-edit__container.css);
-@import url(../blocks/popup-edit/__container-input-item/popup-edit__container-input-item.css);
-@import url(../blocks/popup-edit/__container-save/popup-edit__container-save.css);
-@import url(../blocks/popup-edit/__container-close/popup-edit__container-close.css);
-@import url(../blocks/popup-add/__container-close-icon/popup-add__container-close-icon.css);
-@import url(../blocks/popup-edit/__container-title/popup-edit__container-title.css);
-@import url(../blocks/popup-edit/__input-container/popup-edit__input-container.css);
-@import url(../blocks/popup-edit/__container-close/popup-edit__container-close.css);
-
-@import url(../blocks/popup-add/popup-add.css);
-@import url(../blocks/popup-edit/popup-edit.css);
-@import url(../blocks/popup-add/__input-container/popup-add__input-container.css);
-@import url(../blocks/popup-add/__container/popup-add__container.css);
-@import url(../blocks/popup-add/__container-save/popup-add__container-save.css);
-@import url(../blocks/popup-add/__container-input-item/popup-add__container-input-item.css);
-@import url(../blocks/popup-add/__container-title/popup-add__container-title.css);
-@import url(../blocks/popup-add/__container-close/popup-add__container-close.css);
-
-@import url(../blocks/place-image-full/_opened/place-image-full_opened.css);
-
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__close/popup__close.css);
