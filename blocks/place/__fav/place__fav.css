@@ -3,7 +3,7 @@
     display: inline;
     border: none;
     background-color: transparent;
-    background-image: url('/images/place-fav.svg');
+    background-image: url('../../../images/place-fav.svg');
     background-repeat: no-repeat;
     background-position: center;
     color: #26589F;
