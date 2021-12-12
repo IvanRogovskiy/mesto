@@ -1,3 +1,14 @@
-.popup__input-error {
+.popup__input-error_active {
     display: none;
+    position: absolute;
+    color: #FF0000;
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 400;
+    left: 0;
+    top: calc(100% + 5px);
 }
+
+/*.popup__input-error_active:last-of-type {*/
+/*    margin-bottom: 0;*/
+/*}*/
