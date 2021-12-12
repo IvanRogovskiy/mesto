@@ -61,8 +61,15 @@
                 <form class="form form_type_add" name="add-card">
                     <h2 class="popup__title">Новое место</h2>
                     <fieldset class="popup__input-form">
-                        <input class="popup__input popup__input_type_title" name="title" type="text" placeholder="Название" id="title" value=""/>
-                        <input class="popup__input popup__input_type_src" name="src" type="text" id="src" placeholder="Ссылка на картинку" value=""/>
+                        <label class="popup__field">
+                            <input class="popup__input popup__input_type_title" name="title" type="text" placeholder="Название" id="title" value=""
+                                   required minlength="2" maxlength="40"/>
+                            <span class="popup__input-error title-input-error"></span>
+                        </label>
+                        <label class="popup__field">
+                            <input class="popup__input popup__input_type_src" name="src" type="url" id="src" placeholder="Ссылка на картинку" value=""/>
+                            <span class="popup__input-error src-input-error"></span>
+                        </label>
                     </fieldset>
                     <input type="submit" class="popup__save" value="Создать"/>
                 </form>

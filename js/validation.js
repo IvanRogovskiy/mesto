@@ -23,10 +23,14 @@ const showInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-input-error`);
     inputElement.classList.add('popup__input_type_error');
     errorElement.classList.add('popup__input-error_active');
-    switch (inputElement.id) {
-        case 'src': errorMessage = 'Введите адрес сайта.'; break;
-        default:
-            errorMessage = 'Вы пропустили это поле';
+    if (inputElement.textContent.length === 0) {
+        errorMessage = 'Вы пропустили это поле';
+    }
+    if (inputElement.validity.tooShort === true) {
+        errorMessage = `Минимальное количество символов: 2. Длина текста сейчас: ${inputElement.value.length}`
+    }
+    if (inputElement.validity.typeMismatch === true && inputElement.classList.contains('popup__input_type_src')) {
+        errorMessage = 'Введите адрес сайта';
     }
     errorElement.textContent = errorMessage;
 };
