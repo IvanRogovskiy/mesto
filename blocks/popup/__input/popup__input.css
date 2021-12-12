@@ -7,9 +7,18 @@
     font-size: 14px;
     line-height: 17px;
     box-sizing: border-box;
+    position: relative;
+}
+
+.popup__input:focus {
+    outline: none;
 }
 
 .popup__input:last-of-type {
+    margin-bottom: 0;
+}
+
+.popup__input.popup__input_type {
     margin-bottom: 0;
 }
 

@@ -1,0 +1,7 @@
+.popup__input_type_error {
+    margin-bottom: 5px;
+}
+
+.popup__input_type_error:last-of-type {
+    margin-bottom: 5px;
+}

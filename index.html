@@ -35,11 +35,19 @@
         <div class="popup popup_type_edit">
             <div class="popup__container">
                 <button type="button" class="popup__close"></button>
-                <form name="edit-profile">
+                <form class="form form_type_edit" name="edit-profile">
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <fieldset class="popup__input-form">
-                        <input class="popup__input popup__input_type_name" name="name" type="text" placeholder="Имя" id="name" value="Иван Роговский"/>
-                        <input class="popup__input popup__input_type_rank" name="rank" type="text" id="rank" placeholder="Профессиональная деятельность" value="Начинающий путешественник"/>
+                        <label class="popup__field">
+                            <input class="popup__input popup__input_type_name" name="name"
+                                   type="text" placeholder="Имя" id="name" value="Иван Роговский" autocomplete="off"
+                                   minlength="2" maxlength="40" required/>
+                            <span class="popup__input-error name-input-error"></span>
+                        </label>
+                        <input class="popup__input popup__input_type_rank" name="rank" autocomplete="off"
+                               type="text" id="rank" placeholder="Профессиональная деятельность" value="Начинающий путешественник"
+                               minlength="2" maxlength="200" required/>
+                        <span class="popup__input-error rank-input-error"></span>
                     </fieldset>
                     <input type="submit" class="popup__save" value="Сохранить"/>
                 </form>
@@ -48,7 +56,7 @@
         <div class="popup popup_type_add">
             <div class="popup__container">
                 <button type="button" class="popup__close"></button>
-                <form name="add-card">
+                <form class="form form_type_add" name="add-card">
                     <h2 class="popup__title">Новое место</h2>
                     <fieldset class="popup__input-form">
                         <input class="popup__input popup__input_type_title" name="title" type="text" placeholder="Название" id="title" value=""/>
@@ -77,5 +85,6 @@
             </div>
         </template>
         <script src="js/script.js"></script>
+        <script src="js/validation.js"></script>
     </body>
 </html>
