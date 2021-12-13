@@ -111,6 +111,10 @@ function saveCard(event) {
     closePopup(popupAdd);
 }
 
+function handleOverlayClick() {
+
+}
+
 closeFullPopupButton.addEventListener('click', () => {
     closePopup(popupFull)
 });
