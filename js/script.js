@@ -150,7 +150,6 @@ addCardForm.addEventListener('submit', saveCard);
 
 Array.from(popups).forEach(popup => {
     popup.addEventListener('click', (e) => {
-        if (e.target)
         closePopup(popup);
     });
 })
