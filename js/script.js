@@ -27,6 +27,9 @@ const initialCards = [
 
 const cardsContainer = document.querySelector('.places')
 
+const popups = document.querySelectorAll('.popup');
+const containers = document.querySelectorAll('.popup__container')
+
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupAdd = document.querySelector('.popup_type_add');
 const popupFull = document.querySelector('.popup_type_full');
@@ -111,8 +114,11 @@ function saveCard(event) {
     closePopup(popupAdd);
 }
 
-function handleOverlayClick() {
-
+function keyHandler(evt, popupElement) {
+    console.log(evt.key);
+    if (evt.key === 'Escape') {
+        closePopup(popupElement);
+    }
 }
 
 closeFullPopupButton.addEventListener('click', () => {
@@ -141,3 +147,22 @@ editProfileForm.addEventListener('submit', (evt) => {
     saveNewProfileInfo(evt);
 });
 addCardForm.addEventListener('submit', saveCard);
+
+Array.from(popups).forEach(popup => {
+    popup.addEventListener('click', (e) => {
+        if (e.target)
+        closePopup(popup);
+    });
+})
+
+Array.from(containers).forEach((container) => {
+    container.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+})
+
+document.addEventListener('keydown', (e) => {
+    Array.from(popups).forEach((popup) => {
+        keyHandler(e, popup);
+    })
+});
