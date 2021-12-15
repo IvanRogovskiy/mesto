@@ -53,6 +53,8 @@ const cardLink = document.querySelector('.popup__input_type_src');
 const popupInputName = editProfileForm.querySelector('.popup__input_type_name');
 const popupInputRank = editProfileForm.querySelector('.popup__input_type_rank');
 
+let editWasClosed = false;
+
 function createCard(title, imageLink) {
     const placeTemplate = document.querySelector('#place-template').content;
     const placeCardElement = placeTemplate.querySelector('.place').cloneNode(true);
@@ -125,7 +127,8 @@ closeFullPopupButton.addEventListener('click', () => {
     closePopup(popupFull)
 });
 closeEditPopupButton.addEventListener('click', () => {
-    closePopup(popupEdit)
+    closePopup(popupEdit);
+    editWasClosed = true;
 });
 closeAddPopupButton.addEventListener('click', () => {
     closePopup(popupAdd)
@@ -135,8 +138,10 @@ initialCards.forEach(item => {
     addCard(cardsContainer, createCard(item.name, item.link))
 });
 editProfileButton.addEventListener('click', () => {
-    popupInputName.value = currentName.textContent;
-    popupInputRank.value = currentRank.textContent;
+    if (!editWasClosed) {
+        popupInputName.value = currentName.textContent;
+        popupInputRank.value = currentRank.textContent;
+    }
     openPopup(popupEdit);
 });
 addPlaceCardButton.addEventListener('click', () => {
@@ -149,13 +154,15 @@ editProfileForm.addEventListener('submit', (evt) => {
 addCardForm.addEventListener('submit', saveCard);
 
 Array.from(popups).forEach(popup => {
-    popup.addEventListener('click', (e) => {
+    popup.addEventListener('mousedown', (e) => {
+        console.log()
+        if (e.target !== popup.querySelector('.popup__container') )
         closePopup(popup);
     });
 })
 
 Array.from(containers).forEach((container) => {
-    container.addEventListener('click', (e) => {
+    container.addEventListener('mousedown', (e) => {
         e.stopPropagation();
     });
 })
