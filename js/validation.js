@@ -1,17 +1,7 @@
-const showInputError = (formElement, inputElement, inputErrorClass, errorClass) => {
-    let errorMessage;
+const showInputError = (formElement, inputElement, inputErrorClass, errorClass, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-input-error`);
     inputElement.classList.add(inputErrorClass);
     errorElement.classList.add(errorClass);
-    if (inputElement.textContent.length === 0) {
-        errorMessage = 'Вы пропустили это поле';
-    }
-    if (inputElement.validity.tooShort === true) {
-        errorMessage = `Минимальное количество символов: 2. Длина текста сейчас: ${inputElement.value.length}`
-    }
-    if (inputElement.validity.typeMismatch === true && inputElement.classList.contains('popup__input_type_src')) {
-        errorMessage = 'Введите адрес сайта';
-    }
     errorElement.textContent = errorMessage;
 };
 
@@ -26,7 +16,7 @@ const checkInputValidity = (formElement, inputElement, inputErrorClass, errorCla
     if (inputElement.validity.valid) {
         hideInputError(formElement, inputElement, inputErrorClass, errorClass)
     } else {
-        showInputError(formElement, inputElement, inputErrorClass, errorClass)
+        showInputError(formElement, inputElement, inputErrorClass, errorClass, inputElement.validationMessage)
     }
 };
 
@@ -39,14 +29,16 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
       buttonElement.classList.add(inactiveButtonClass);
+      buttonElement.setAttribute("disabled", true);
   } else {
       buttonElement.classList.remove(inactiveButtonClass);
+      buttonElement.removeAttribute("disabled");
   }
 }
 
 const setEventListeners = (formElement, params) => {
     const inputList = Array.from(formElement.querySelectorAll(params.inputSelector));
-    const buttonElement = formElement.closest('.popup__container').querySelector(params.submitButtonSelector);
+    const buttonElement = formElement.querySelector(params.submitButtonSelector);
     toggleButtonState(inputList, buttonElement);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
@@ -62,10 +54,7 @@ const enableValidation = (params) => {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
         });
-        const fieldSetList = Array.from(form.querySelectorAll('.popup__input-form'));
-        fieldSetList.forEach((fieldSet) => {
-            setEventListeners(fieldSet, params)
-        });
+        setEventListeners(form, params);
     });
 };
 
