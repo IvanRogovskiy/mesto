@@ -1,3 +1,6 @@
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+
 const initialCards = [
     {
         name: 'Архыз',
@@ -26,6 +29,7 @@ const initialCards = [
 ];
 
 const cardsContainer = document.querySelector('.places')
+const forms = document.querySelectorAll('.popup__form')
 
 const popups = document.querySelectorAll('.popup');
 
@@ -52,51 +56,18 @@ const cardLink = document.querySelector('.popup__input_type_src');
 const popupInputName = editProfileForm.querySelector('.popup__input_type_name');
 const popupInputRank = editProfileForm.querySelector('.popup__input_type_rank');
 
-const placeImageFullImage = document.querySelector('.popup__container-full-image');
-const placeImageFullName = document.querySelector('.popup__container-full-name');
-
 let editWasClosed = false;
-
-function createCard(title, imageLink) {
-    const placeTemplate = document.querySelector('#place-template').content;
-    const placeCardElement = placeTemplate.querySelector('.place').cloneNode(true);
-    const placeImage = placeCardElement.querySelector('.place__image');
-    const placeTitle = placeCardElement.querySelector('.place__name');
-    const favPlaceButton = placeCardElement.querySelector('.place__fav');
-
-    favPlaceButton.addEventListener('click', handleLike)
-    placeCardElement.querySelector('.place__delete').addEventListener('click', removeCard);
-    placeImage.src = imageLink;
-    placeImage.alt = `На фото изображен ${title}`
-    placeTitle.textContent = title;
-    placeImage.addEventListener('click', (evt) => {
-        placeImageFullImage.src = evt.target.src;
-        placeImageFullImage.alt = evt.target.alt;
-        placeImageFullName.textContent = title;
-        openPopup(popupFull);
-    });
-    return placeCardElement
-}
 
 function addCard(container, cardElement) {
     container.prepend(cardElement);
 }
 
-function handleLike(evt) {
-    evt.target.classList.toggle('place__fav_liked')
-}
-
-function removeCard(evt) {
-    const parentCard = evt.target.closest('.place');
-    parentCard.remove();
-}
-
-function openPopup(popup) {
+ export function openPopup(popup) {
     popup.classList.add('popup_opened')
     document.addEventListener('keydown', keyHandler)
 }
 
-function closePopup(popup) {
+export function closePopup(popup) {
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', keyHandler);
 }
@@ -112,7 +83,8 @@ function saveCard(event) {
     event.preventDefault();
     const title = cardTitle.value
     const link = cardLink.value;
-    addCard(cardsContainer, createCard(title, link));
+    const newCard = new Card(title, link, '#place-template').generateCard();
+    addCard(cardsContainer, newCard);
     addCardForm.reset();
     closePopup(popupAdd);
     const saveButton = event.target.querySelector('.popup__save');
@@ -120,7 +92,7 @@ function saveCard(event) {
     saveButton.setAttribute("disabled", "true");
 }
 
-function keyHandler(evt) {
+export function keyHandler(evt) {
     console.log(evt.key);
     if (evt.key === 'Escape') {
         const openedPopup = document.querySelector('.popup_opened');
@@ -139,14 +111,12 @@ closeAddPopupButton.addEventListener('click', () => {
     closePopup(popupAdd)
 });
 
-initialCards.forEach(item => {
-    addCard(cardsContainer, createCard(item.name, item.link))
-});
 editProfileButton.addEventListener('click', () => {
     popupInputName.value = currentName.textContent;
     popupInputRank.value = currentRank.textContent;
     openPopup(popupEdit);
 });
+
 addPlaceCardButton.addEventListener('click', () => {
     openPopup(popupAdd);
 });
@@ -154,6 +124,7 @@ addPlaceCardButton.addEventListener('click', () => {
 editProfileForm.addEventListener('submit', (evt) => {
     saveNewProfileInfo(evt);
 });
+
 addCardForm.addEventListener('submit', saveCard);
 
 Array.from(popups).forEach(popup => {
@@ -162,4 +133,21 @@ Array.from(popups).forEach(popup => {
         if (e.target === popup)
         closePopup(popup);
     });
+})
+
+initialCards.forEach(item => {
+    const card = new Card(item.name, item.link, '#place-template').generateCard();
+    addCard(cardsContainer, card);
+});
+
+Array.from(forms).forEach((form) => {
+    const validator = new FormValidator({
+        formSelector: '.popup__form',
+        inputSelector: '.popup__input',
+        submitButtonSelector: '.popup__save',
+        inactiveButtonClass: 'popup__save_inactive',
+        inputErrorClass: 'popup__input_type_error',
+        errorClass: 'popup__input-error_active'
+    }, form);
+    validator.enableValidation()
 })
