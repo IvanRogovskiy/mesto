@@ -1,11 +1,11 @@
-import {openPopup} from "./script.js";
-
 export default class Card {
 
-    constructor(name, imageSrc, templateSelector) {
+    constructor(name, imageSrc, templateSelector, handleCardClick) {
         this._name = name;
         this._imageSrc = imageSrc;
         this._cardElement = this._getCardElement(templateSelector);
+        this._handleCardClick = handleCardClick;
+        this._cardImage = this._cardElement.querySelector('.place__image');
     }
 
     _getCardElement(templateSelector) {
@@ -22,16 +22,6 @@ export default class Card {
         evt.target.classList.toggle('place__fav_liked')
     };
 
-    _showFullImage(evt) {
-        const placeImageFullImage = document.querySelector('.popup__container-full-image');
-        const placeImageFullName = document.querySelector('.popup__container-full-name');
-        placeImageFullImage.src = evt.target.src;
-        placeImageFullImage.alt = evt.target.alt;
-        placeImageFullName.textContent = this._name;
-        const popupFull = document.querySelector('.popup_type_full');
-        openPopup(popupFull);
-    }
-
     _setEventListeners() {
         this._cardElement.querySelector('.place__delete').addEventListener('click', (evt) => {
             this._removeCard(evt)
@@ -39,8 +29,8 @@ export default class Card {
         this._cardElement.querySelector('.place__fav').addEventListener('click', (evt) => {
             this._handleLike(evt)
         });
-        this._cardElement.querySelector('.place__image').addEventListener('click', (evt) => {
-            this._showFullImage(evt);
+        this._cardImage.addEventListener('click', () => {
+            this._handleCardClick(this._name, this._imageSrc);
         });
     }
 
