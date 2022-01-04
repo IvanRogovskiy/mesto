@@ -36,9 +36,8 @@ export default class Card {
 
     generateCard() {
         this._cardElement.querySelector('.place__name').textContent = this._name;
-        const placeImage = this._cardElement.querySelector('.place__image');
-        placeImage.src = this._imageSrc;
-        placeImage.alt = `На фото изображен ${this._name}`;
+        this._cardImage.src = this._imageSrc;
+        this._cardImage.alt = `На фото изображен ${this._name}`;
         this._setEventListeners();
         return this._cardElement;
     }

@@ -40,10 +40,6 @@ const popupFull = document.querySelector('.popup_type_full');
 const addCardForm = document.querySelector('form[name="add-card"]');
 const editProfileForm = document.querySelector('form[name="edit-profile"]');
 
-const closeEditPopupButton = popupEdit.querySelector('.popup__close');
-const closeAddPopupButton = popupAdd.querySelector('.popup__close');
-const closeFullPopupButton = popupFull.querySelector('.popup__close');
-
 const editProfileButton = document.querySelector('.profile__info-edit-button');
 const addPlaceCardButton = document.querySelector('.profile__add-button');
 
@@ -106,16 +102,6 @@ function handleCardClick(name, link) {
     placeImageFullImage.src = link;
     openPopup(popupFull);
 }
-
-// closeFullPopupButton.addEventListener('click', () => {
-//     closePopup(popupFull)
-// });
-// closeEditPopupButton.addEventListener('click', () => {
-//     closePopup(popupEdit);
-// });
-// closeAddPopupButton.addEventListener('click', () => {
-//     closePopup(popupAdd)
-// });
 
 editProfileButton.addEventListener('click', () => {
     popupInputName.value = currentName.textContent;
