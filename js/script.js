@@ -76,13 +76,14 @@ function saveNewProfileInfo(event) {
     closePopup(popupEdit);
 }
 
-function createCard(title, imageSrc, template, clickHandler) {
-    return new Card(title, imageSrc, template, clickHandler).generateCard();
+// а если у нас будет другой еще какой-то темплейт для карточки в будущем?
+function createCard(title, imageSrc) {
+    return new Card(title, imageSrc, '#place-template', handleCardClick).generateCard();
 }
 
 function saveCard(event) {
     event.preventDefault();
-    const newCard = createCard(cardTitle.value, cardLink.value,'#place-template', handleCardClick)
+    const newCard = createCard(cardTitle.value, cardLink.value)
     addCard(cardsContainer, newCard);
     addCardForm.reset();
     closePopup(popupAdd);
@@ -121,24 +122,16 @@ editProfileForm.addEventListener('submit', (evt) => {
 
 addCardForm.addEventListener('submit', saveCard);
 
-Array.from(popups).forEach(popup => {
-    popup.addEventListener('mousedown', (e) => {
-        console.log()
-        if (e.target === popup)
-        closePopup(popup);
-    });
-})
-
 popups.forEach((popup) => {
     popup.addEventListener('click', (e) => {
-        if ((e.target.classList.contains('popup__opened')) || (e.target.classList.contains('popup__close'))) {
+        if ((e.target.classList.contains('popup_opened')) || (e.target.classList.contains('popup__close'))) {
             closePopup(popup);
         }
     })
 })
 
 initialCards.forEach(item => {
-    const card = createCard(item.name, item.link, '#place-template', handleCardClick)
+    const card = createCard(item.name, item.link)
     addCard(cardsContainer, card);
 });
 
