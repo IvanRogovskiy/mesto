@@ -1,6 +1,7 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import {validationConfig} from "./validationConfig.js";
+import '../pages/index.css';
 
 const initialCards = [
     {
@@ -148,3 +149,10 @@ const enableValidation = (validationConfig) => {
 };
 
 enableValidation(validationConfig);
+
+const numbers = [2, 3, 5];
+
+// Стрелочная функция. Не запнётся ли на ней Internet Explorer?
+const doubledNumbers = numbers.map(number => number * 2);
+
+console.log(doubledNumbers); // 4, 6, 10
