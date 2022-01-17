@@ -3,6 +3,8 @@ import FormValidator from "../components/FormValidator.js";
 import {initialCards, validationParams} from "../utils/constants.js";
 import '../../index.css';
 import Section from "../components/Section";
+import PopupWithImage from "../components/PopupWithImage";
+import PopupWithForm from "../components/PopupWithForm";
 
 const cardsContainer = document.querySelector('.places')
 
@@ -52,17 +54,17 @@ function saveNewProfileInfo(event) {
 }
 
 // а если у нас будет другой еще какой-то темплейт для карточки в будущем?
-function createCard(title, imageSrc) {
-    return new Card(title, imageSrc, '#place-template', handleCardClick).generateCard();
-}
+// function createCard(title, imageSrc) {
+//     return new Card(title, imageSrc, '#place-template', handleCardClick).generateCard();
+// }
 
-function saveCard(event) {
-    event.preventDefault();
-    const newCard = createCard(cardTitle.value, cardLink.value)
-    addCard(cardsContainer, newCard);
-    addCardForm.reset();
-    closePopup(popupAdd);
-}
+// function saveCard(event) {
+//     event.preventDefault();
+//     const newCard = createCard(cardTitle.value, cardLink.value)
+//     addCard(cardsContainer, newCard);
+//     addCardForm.reset();
+//     closePopup(popupAdd);
+// }
 //
 // export function keyHandler(evt) {
 //     console.log(evt.key);
@@ -72,18 +74,23 @@ function saveCard(event) {
 //     }
 // }
 //
-// function handleCardClick(name, link) {
-//     placeImageFullName.textContent = name;
-//     placeImageFullName.alt = `На фото изображен ${name}`;
-//     placeImageFullImage.src = link;
-//     openPopup(popupFull);
-// }
+
+function handleCardClick(name, link) {
+    const popupWithImage = new PopupWithImage('.popup_type_full', {data: { src: link, name}});
+    popupWithImage.setEventListeners();
+    popupWithImage.open()
+}
 
 editProfileButton.addEventListener('click', () => {
-    popupInputName.value = currentName.textContent;
-    popupInputRank.value = currentRank.textContent;
-    formValidators[editProfileForm.getAttribute('name')].resetValidation();
-    openPopup(popupEdit);
+    const editProfilePopup = new PopupWithForm('.popup_type_edit', (e) => {
+        e.preventDefault()
+        currentName.textContent = popupInputName.value;
+        currentRank.textContent = popupInputRank.value;
+        editProfilePopup.close();
+        formValidators[editProfileForm.getAttribute('name')].resetValidation();
+    });
+    editProfilePopup.setEventListeners();
+    editProfilePopup.open(currentName, currentRank);
 });
 
 addPlaceCardButton.addEventListener('click', () => {
@@ -91,11 +98,11 @@ addPlaceCardButton.addEventListener('click', () => {
     openPopup(popupAdd);
 });
 
-editProfileForm.addEventListener('submit', (evt) => {
-    saveNewProfileInfo(evt);
-});
+// editProfileForm.addEventListener('submit', (evt) => {
+//     saveNewProfileInfo(evt);
+// });
 
-addCardForm.addEventListener('submit', saveCard);
+// addCardForm.addEventListener('submit', saveCard);
 
 // popups.forEach((popup) => {
 //     popup.addEventListener('click', (e) => {
@@ -108,7 +115,7 @@ addCardForm.addEventListener('submit', saveCard);
 const cardsList = new Section({
     items: initialCards,
     renderer: (item) => {
-        const card = createCard(item.name, item.link);
+        const card = new Card(item.name, item.link, '#place-template', handleCardClick).generateCard();
         cardsList.addItem(card);
     }}, '.places');
 

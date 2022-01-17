@@ -47,5 +47,6 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin() // подключение плагина для объединения файлов
-    ]
+    ],
+    devtool: 'source-map'
 };
