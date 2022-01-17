@@ -1,4 +1,4 @@
-import {keyHandler} from "./script";
+import {keyHandler} from "../pages";
 
 export default class Popup {
 

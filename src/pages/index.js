@@ -1,34 +1,8 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
-import {validationConfig} from "./validationConfig.js";
-import '../pages/index.css';
-
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import {initialCards, validationParams} from "../utils/constants.js";
+import '../../index.css';
+import Section from "../components/Section";
 
 const cardsContainer = document.querySelector('.places')
 
@@ -89,21 +63,21 @@ function saveCard(event) {
     addCardForm.reset();
     closePopup(popupAdd);
 }
-
-export function keyHandler(evt) {
-    console.log(evt.key);
-    if (evt.key === 'Escape') {
-        const openedPopup = document.querySelector('.popup_opened');
-        closePopup(openedPopup);
-    }
-}
-
-function handleCardClick(name, link) {
-    placeImageFullName.textContent = name;
-    placeImageFullName.alt = `На фото изображен ${name}`;
-    placeImageFullImage.src = link;
-    openPopup(popupFull);
-}
+//
+// export function keyHandler(evt) {
+//     console.log(evt.key);
+//     if (evt.key === 'Escape') {
+//         const openedPopup = document.querySelector('.popup_opened');
+//         closePopup(openedPopup);
+//     }
+// }
+//
+// function handleCardClick(name, link) {
+//     placeImageFullName.textContent = name;
+//     placeImageFullName.alt = `На фото изображен ${name}`;
+//     placeImageFullImage.src = link;
+//     openPopup(popupFull);
+// }
 
 editProfileButton.addEventListener('click', () => {
     popupInputName.value = currentName.textContent;
@@ -123,18 +97,27 @@ editProfileForm.addEventListener('submit', (evt) => {
 
 addCardForm.addEventListener('submit', saveCard);
 
-popups.forEach((popup) => {
-    popup.addEventListener('click', (e) => {
-        if ((e.target.classList.contains('popup_opened')) || (e.target.classList.contains('popup__close'))) {
-            closePopup(popup);
-        }
-    })
-})
+// popups.forEach((popup) => {
+//     popup.addEventListener('click', (e) => {
+//         if ((e.target.classList.contains('popup_opened')) || (e.target.classList.contains('popup__close'))) {
+//             closePopup(popup);
+//         }
+//     })
+// })
 
-initialCards.forEach(item => {
-    const card = createCard(item.name, item.link)
-    addCard(cardsContainer, card);
-});
+const cardsList = new Section({
+    items: initialCards,
+    renderer: (item) => {
+        const card = createCard(item.name, item.link);
+        cardsList.addItem(card);
+    }}, '.places');
+
+cardsList.renderItems();
+
+// initialCards.forEach(item => {
+//     const card = createCard(item.name, item.link)
+//     addCard(cardsContainer, card);
+// });
 
 const formValidators = {};
 
@@ -148,11 +131,4 @@ const enableValidation = (validationConfig) => {
     })
 };
 
-enableValidation(validationConfig);
-
-const numbers = [2, 3, 5];
-
-// Стрелочная функция. Не запнётся ли на ней Internet Explorer?
-const doubledNumbers = numbers.map(number => number * 2);
-
-console.log(doubledNumbers); // 4, 6, 10
+enableValidation(validationParams);

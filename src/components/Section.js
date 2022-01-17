@@ -17,7 +17,6 @@ export default class Section {
     };
 
     addItem(element) {
-        this.clear();
-        document.querySelector(this._container).append(element);
+        this._container.append(element);
     }
 }
