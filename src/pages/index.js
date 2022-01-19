@@ -5,6 +5,7 @@ import '../../index.css';
 import Section from "../components/Section";
 import PopupWithImage from "../components/PopupWithImage";
 import PopupWithForm from "../components/PopupWithForm";
+import UserInfo from "../components/UserInfo";
 
 const cardsContainer = document.querySelector('.places')
 
@@ -90,11 +91,13 @@ editProfileButton.addEventListener('click', () => {
         formValidators[editProfileForm.getAttribute('name')].resetValidation();
     });
     editProfilePopup.setEventListeners();
-    editProfilePopup.open(currentName, currentRank);
+    editProfilePopup.setFieldValues(new UserInfo('.profile__info-name', '.profile__info-rank').getUserInfo())
+    editProfilePopup.open();
 });
 
 addPlaceCardButton.addEventListener('click', () => {
     formValidators[addCardForm.getAttribute('name')].resetValidation();
+    const addCardPopup = new PopupWithForm('.popup_type_add')
     openPopup(popupAdd);
 });
 

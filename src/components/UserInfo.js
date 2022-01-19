@@ -7,8 +7,8 @@ export default class UserInfo {
 
     getUserInfo() {
         return {
-            name: this._nameElement.value,
-            rank: this._rankElement.value
+            name: this._nameElement.textContent,
+            rank: this._rankElement.textContent
         }
     }
 

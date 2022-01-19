@@ -23,9 +23,17 @@ export default class PopupWithForm extends Popup {
         this._form.addEventListener('submit',this._formSubmitter);
     };
 
-    open(currentName, currentRank) {
-        this._inputName.value = currentName.textContent;
-        this._inputRank.value = currentRank.textContent;
+    setFieldValues(values) {
+        Object.keys(values).forEach(key => {
+            this._form.querySelector(`input[name=${key}]`).value = values[key];
+        })
+        // for (value of values) {
+        //     this._form.querySelector(`input[name=${value}]`)
+        // }
+        // this._form.querySelector(values)
+    }
+
+    open() {
         super.open();
     }
 
