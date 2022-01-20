@@ -83,12 +83,14 @@ function handleCardClick(name, link) {
 }
 
 editProfileButton.addEventListener('click', () => {
-    const editProfilePopup = new PopupWithForm('.popup_type_edit', (e) => {
-        e.preventDefault()
-        currentName.textContent = popupInputName.value;
-        currentRank.textContent = popupInputRank.value;
-        editProfilePopup.close();
-        formValidators[editProfileForm.getAttribute('name')].resetValidation();
+    const editProfilePopup = new PopupWithForm({selector:'.popup_type_edit',
+        formSubmitter: (inputValues) => {
+            // e.preventDefault();
+            currentName.textContent = inputValues["name"];
+            currentRank.textContent = inputValues["rank"];
+            editProfilePopup.close();
+            formValidators[editProfileForm.getAttribute('name')].resetValidation();
+        }
     });
     editProfilePopup.setEventListeners();
     editProfilePopup.setFieldValues(new UserInfo('.profile__info-name', '.profile__info-rank').getUserInfo())
@@ -97,7 +99,9 @@ editProfileButton.addEventListener('click', () => {
 
 addPlaceCardButton.addEventListener('click', () => {
     formValidators[addCardForm.getAttribute('name')].resetValidation();
-    const addCardPopup = new PopupWithForm('.popup_type_add')
+    const addCardPopup = new PopupWithForm('.popup_type_add', (e) => {
+        e.preventDefault();
+    })
     openPopup(popupAdd);
 });
 
