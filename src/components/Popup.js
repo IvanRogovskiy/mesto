@@ -1,5 +1,3 @@
-import {keyHandler} from "../pages";
-
 export default class Popup {
 
     constructor(selector) {
@@ -8,7 +6,6 @@ export default class Popup {
 
     _handleEscClose(evt) {
         if (evt.key === 'Escape') {
-            // const openedPopup = document.querySelector('.popup_opened');
             this.close();
         }
     }

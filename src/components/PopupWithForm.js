@@ -10,7 +10,7 @@ export default class PopupWithForm extends Popup {
 
     _getInputValues() {
         let formValues = {};
-        this._popup.querySelectorAll('input[type="text"]').forEach(input => {
+        this._popup.querySelectorAll('input:not([type="submit"])').forEach(input => {
             formValues[input.name] = input.value;
         });
         return formValues
@@ -28,10 +28,6 @@ export default class PopupWithForm extends Popup {
         Object.keys(values).forEach(key => {
             this._form.querySelector(`input[name=${key}]`).value = values[key];
         })
-        // for (value of values) {
-        //     this._form.querySelector(`input[name=${value}]`)
-        // }
-        // this._form.querySelector(values)
     }
 
     open() {
@@ -40,6 +36,7 @@ export default class PopupWithForm extends Popup {
 
     close() {
         this._form.removeEventListener('submit', this._formSubmitter);
+        this._form.reset();
         super.close();
     }
 }
