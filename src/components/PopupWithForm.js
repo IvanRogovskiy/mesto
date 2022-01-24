@@ -10,7 +10,7 @@ export default class PopupWithForm extends Popup {
 
     _getInputValues() {
         let formValues = {};
-        this._popup.querySelectorAll('input:not([type="submit"])').forEach(input => {
+        this._popup.querySelectorAll('.popup__input').forEach(input => {
             formValues[input.name] = input.value;
         });
         return formValues

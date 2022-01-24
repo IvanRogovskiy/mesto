@@ -13,10 +13,14 @@ const editProfileForm = document.querySelector('form[name="edit-profile"]');
 const editProfileButton = document.querySelector('.profile__info-edit-button');
 const addPlaceCardButton = document.querySelector('.profile__add-button');
 
-function handleCardClick(name, link) {
-    const popupWithImage = new PopupWithImage('.popup_type_full', {data: { src: link, name}});
+function createNewCard(name, link) {
+    return new Card(name, link, '#place-template', handleCardClick).generateCard();
+}
+
+const popupWithImage = new PopupWithImage('.popup_type_full');
+function handleCardClick(name, src) {
     popupWithImage.setEventListeners();
-    popupWithImage.open()
+    popupWithImage.open(name, src);
 }
 
 const userInfo = new UserInfo('.profile__info-name', '.profile__info-rank');
@@ -36,7 +40,7 @@ editProfileButton.addEventListener('click', () => {
 
 const addCardPopup = new PopupWithForm({selector: '.popup_type_add',
     formSubmitter: (inputValues) => {
-        const card = new Card(inputValues["title"], inputValues["src"], '#place-template', handleCardClick).generateCard();
+        const card = createNewCard(inputValues["title"], inputValues["src"]);
         cardsList.addItem(card);
         addCardPopup.close();
     }
@@ -51,7 +55,7 @@ addPlaceCardButton.addEventListener('click', () => {
 const cardsList = new Section({
     items: initialCards,
     renderer: (item) => {
-        const card = new Card(item.name, item.link, '#place-template', handleCardClick).generateCard();
+        const card = createNewCard(item.name, item.link);
         cardsList.addItem(card);
     }}, '.places');
 
@@ -59,6 +63,8 @@ cardsList.renderItems();
 
 const formValidators = {};
 
+//концепцию такую предложил предыдущий ревьюер - Gennadiy Barsegyan. Мне понравилось, если честно. Может он вас тоже убедит
+//если вы поговорите :)
 const enableValidation = (validationConfig) => {
     const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
     formList.forEach((formElement) => {
