@@ -14,7 +14,6 @@ export default class Section {
         this.clear();
         this._items.forEach(item => {
             this._renderer(item);
-            // this._items = this._items.filter(i => { return i !== item });
         });
     };
 

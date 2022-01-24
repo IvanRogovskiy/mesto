@@ -13,39 +13,38 @@ const editProfileForm = document.querySelector('form[name="edit-profile"]');
 const editProfileButton = document.querySelector('.profile__info-edit-button');
 const addPlaceCardButton = document.querySelector('.profile__add-button');
 
-const currentName = document.querySelector('.profile__info-name');
-const currentRank = document.querySelector('.profile__info-rank');
-
 function handleCardClick(name, link) {
     const popupWithImage = new PopupWithImage('.popup_type_full', {data: { src: link, name}});
     popupWithImage.setEventListeners();
     popupWithImage.open()
 }
 
+const userInfo = new UserInfo('.profile__info-name', '.profile__info-rank');
+const editProfilePopup = new PopupWithForm({selector:'.popup_type_edit',
+    formSubmitter: (inputValues) => {
+        userInfo.setUserInfo(inputValues["name"], inputValues["rank"])
+        editProfilePopup.close();
+        formValidators[editProfileForm.getAttribute('name')].resetValidation();
+    }
+});
+editProfilePopup.setEventListeners();
+
 editProfileButton.addEventListener('click', () => {
-    const editProfilePopup = new PopupWithForm({selector:'.popup_type_edit',
-        formSubmitter: (inputValues) => {
-            currentName.textContent = inputValues["name"];
-            currentRank.textContent = inputValues["rank"];
-            editProfilePopup.close();
-            formValidators[editProfileForm.getAttribute('name')].resetValidation();
-        }
-    });
-    editProfilePopup.setEventListeners();
-    editProfilePopup.setFieldValues(new UserInfo('.profile__info-name', '.profile__info-rank').getUserInfo())
+    editProfilePopup.setFieldValues(userInfo.getUserInfo());
     editProfilePopup.open();
 });
 
+const addCardPopup = new PopupWithForm({selector: '.popup_type_add',
+    formSubmitter: (inputValues) => {
+        const card = new Card(inputValues["title"], inputValues["src"], '#place-template', handleCardClick).generateCard();
+        cardsList.addItem(card);
+        addCardPopup.close();
+    }
+});
+addCardPopup.setEventListeners();
+
 addPlaceCardButton.addEventListener('click', () => {
     formValidators[addCardForm.getAttribute('name')].resetValidation();
-    const addCardPopup = new PopupWithForm({selector: '.popup_type_add',
-            formSubmitter: (inputValues) => {
-            const card = new Card(inputValues["title"], inputValues["src"], '#place-template', handleCardClick).generateCard();
-            cardsList.addItem(card);
-            addCardPopup.close();
-            }
-    });
-    addCardPopup.setEventListeners();
     addCardPopup.open()
 });
 
