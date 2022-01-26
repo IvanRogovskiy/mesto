@@ -7,8 +7,8 @@ import PopupWithImage from "../components/PopupWithImage";
 import PopupWithForm from "../components/PopupWithForm";
 import UserInfo from "../components/UserInfo";
 
-const addCardForm = document.querySelector('form[name="add-card"]');
-const editProfileForm = document.querySelector('form[name="edit-profile"]');
+const addCardForm = document.querySelector('.popup__form_type_add');
+const editProfileForm = document.querySelector('.popup__form_type_edit');
 
 const editProfileButton = document.querySelector('.profile__info-edit-button');
 const addPlaceCardButton = document.querySelector('.profile__add-button');
@@ -19,14 +19,14 @@ function createNewCard(name, link) {
 
 const popupWithImage = new PopupWithImage('.popup_type_full');
 function handleCardClick(name, src) {
-    popupWithImage.setEventListeners();
     popupWithImage.open(name, src);
 }
+popupWithImage.setEventListeners();
 
 const userInfo = new UserInfo('.profile__info-name', '.profile__info-rank');
 const editProfilePopup = new PopupWithForm({selector:'.popup_type_edit',
-    formSubmitter: (inputValues) => {
-        userInfo.setUserInfo(inputValues["name"], inputValues["rank"])
+    formSubmitter: ({name, rank}) => {
+        userInfo.setUserInfo(name, rank)
         editProfilePopup.close();
         formValidators[editProfileForm.getAttribute('name')].resetValidation();
     }
@@ -39,8 +39,8 @@ editProfileButton.addEventListener('click', () => {
 });
 
 const addCardPopup = new PopupWithForm({selector: '.popup_type_add',
-    formSubmitter: (inputValues) => {
-        const card = createNewCard(inputValues["title"], inputValues["src"]);
+    formSubmitter: ({title, src}) => {
+        const card = createNewCard(title, src);
         cardsList.addItem(card);
         addCardPopup.close();
     }
@@ -63,8 +63,6 @@ cardsList.renderItems();
 
 const formValidators = {};
 
-//концепцию такую предложил предыдущий ревьюер - Gennadiy Barsegyan. Мне понравилось, если честно. Может он вас тоже убедит
-//если вы поговорите :)
 const enableValidation = (validationConfig) => {
     const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
     formList.forEach((formElement) => {
