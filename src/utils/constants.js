@@ -33,3 +33,9 @@ export const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
+
+export const baseUrl = 'https://mesto.nomoreparties.co/v1/cohort-35';
+export const headers = {
+            authorization: 'd1dbd6a3-e54d-478f-a23d-d884fc9a8682',
+            'Content-Type': 'application/json'
+}

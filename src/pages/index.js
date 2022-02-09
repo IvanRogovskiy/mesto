@@ -1,11 +1,12 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import {initialCards, validationParams} from "../utils/constants.js";
+import {baseUrl, headers, initialCards, validationParams} from "../utils/constants.js";
 import '../../index.css';
 import Section from "../components/Section";
 import PopupWithImage from "../components/PopupWithImage";
 import PopupWithForm from "../components/PopupWithForm";
 import UserInfo from "../components/UserInfo";
+import Api from "../components/Api";
 
 const addCardForm = document.querySelector('.popup__form_type_add');
 const editProfileForm = document.querySelector('.popup__form_type_edit');
@@ -13,8 +14,25 @@ const editProfileForm = document.querySelector('.popup__form_type_edit');
 const editProfileButton = document.querySelector('.profile__info-edit-button');
 const addPlaceCardButton = document.querySelector('.profile__add-button');
 
+const userName = document.querySelector('.profile__info-name');
+const userRank = document.querySelector('.profile__info-rank');
+const userAvatar = document.querySelector('.profile__avatar');
+
+const api = new Api({baseUrl, headers});
+
 function createNewCard(name, link) {
     return new Card(name, link, '#place-template', handleCardClick).generateCard();
+}
+
+function getAndRenderUserInfo() {
+    api.getMyProfileInfo()
+        .then(userData => {
+            const {name, about, avatar} = userData;
+            userName.textContent = name;
+            userRank.textContent = about;
+            userAvatar.src = avatar;
+        })
+        .catch(error => console.log(error));
 }
 
 const popupWithImage = new PopupWithImage('.popup_type_full');
@@ -51,6 +69,8 @@ addPlaceCardButton.addEventListener('click', () => {
     formValidators[addCardForm.getAttribute('name')].resetValidation();
     addCardPopup.open()
 });
+
+getAndRenderUserInfo();
 
 const cardsList = new Section({
     items: initialCards,
