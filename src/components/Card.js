@@ -1,8 +1,9 @@
 export default class Card {
 
-    constructor(name, imageSrc, templateSelector, handleCardClick) {
+    constructor(name, imageSrc, userId, templateSelector, handleCardClick) {
         this._name = name;
         this._imageSrc = imageSrc;
+        this._userId = userId;
         this._cardElement = this._getCardElement(templateSelector);
         this._handleCardClick = handleCardClick;
         this._cardImage = this._cardElement.querySelector('.place__image');
@@ -22,10 +23,12 @@ export default class Card {
         evt.target.classList.toggle('place__fav_liked')
     };
 
-    _setEventListeners() {
-        this._cardElement.querySelector('.place__delete').addEventListener('click', (evt) => {
-            this._removeCard(evt)
-        });
+    _setEventListeners(deletable) {
+        if (deletable) {
+            this._cardElement.querySelector('.place__delete').addEventListener('click', (evt) => {
+                this._removeCard(evt)
+            });
+        }
         this._cardElement.querySelector('.place__fav').addEventListener('click', (evt) => {
             this._handleLike(evt)
         });
@@ -34,11 +37,16 @@ export default class Card {
         });
     }
 
-    generateCard() {
+    generateCard(deletable = false) {
         this._cardElement.querySelector('.place__name').textContent = this._name;
         this._cardImage.src = this._imageSrc;
         this._cardImage.alt = `На фото изображен ${this._name}`;
-        this._setEventListeners();
+        if (!deletable) {
+            this._cardElement.querySelector('.place').removeChild(this._cardElement.querySelector('.place__delete'));
+            this._setEventListeners(false);
+        } else {
+            this._setEventListeners(true);
+        }
         return this._cardElement;
     }
 }

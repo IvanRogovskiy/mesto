@@ -16,4 +16,12 @@ export default class UserInfo {
         this._nameElement.textContent = name;
         this._rankElement.textContent = rank;
     }
+
+    setUserId(userId) {
+        this._userId = userId
+    }
+
+    getUserId() {
+        return this._userId
+    }
 }

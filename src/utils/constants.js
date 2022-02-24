@@ -34,8 +34,10 @@ export const initialCards = [
     }
 ];
 
+export const token = 'd1dbd6a3-e54d-478f-a23d-d884fc9a8682'
+
 export const baseUrl = 'https://mesto.nomoreparties.co/v1/cohort-35';
 export const headers = {
-            authorization: 'd1dbd6a3-e54d-478f-a23d-d884fc9a8682',
+            authorization: token,
             'Content-Type': 'application/json'
 }
