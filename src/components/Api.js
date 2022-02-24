@@ -24,4 +24,31 @@ export default class Api {
             })
     }
 
+    getUsersCards() {
+        return fetch(`${this._baseUrl}/cards `, {
+            headers: this._headers
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Ошибка ${res.status}`)
+            })
+    }
+
+    updateUserInfo({name, about}) {
+        return fetch(`${this._baseUrl}/users/me`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                name,
+                about
+            })
+        })
+            .then(res => {
+                if (res.ok) { return res.json() }
+                return Promise.reject(`Ошибка ${res.status} при обновлении данных юзера`)
+            })
+    }
+
 }

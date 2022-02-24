@@ -14,8 +14,6 @@ const editProfileForm = document.querySelector('.popup__form_type_edit');
 const editProfileButton = document.querySelector('.profile__info-edit-button');
 const addPlaceCardButton = document.querySelector('.profile__add-button');
 
-const userName = document.querySelector('.profile__info-name');
-const userRank = document.querySelector('.profile__info-rank');
 const userAvatar = document.querySelector('.profile__avatar');
 
 const api = new Api({baseUrl, headers});
@@ -28,9 +26,11 @@ function getAndRenderUserInfo() {
     api.getMyProfileInfo()
         .then(userData => {
             const {name, about, avatar} = userData;
-            userName.textContent = name;
-            userRank.textContent = about;
-            userAvatar.src = avatar;
+            userInfo.setUserInfo(name, about)
+            if (avatar) {
+                userAvatar.src = avatar;
+            }
+
         })
         .catch(error => console.log(error));
 }
@@ -44,7 +44,12 @@ popupWithImage.setEventListeners();
 const userInfo = new UserInfo('.profile__info-name', '.profile__info-rank');
 const editProfilePopup = new PopupWithForm({selector:'.popup_type_edit',
     formSubmitter: ({name, rank}) => {
-        userInfo.setUserInfo(name, rank)
+        api.updateUserInfo({name, about: rank}).then(res => {
+            if (res.name !== name || res.about !== rank) {
+                throw new Error('Profile has been updated incorrectly')
+            }
+            userInfo.setUserInfo(res.name, res.about);
+        })
         editProfilePopup.close();
         formValidators[editProfileForm.getAttribute('name')].resetValidation();
     }
@@ -72,14 +77,23 @@ addPlaceCardButton.addEventListener('click', () => {
 
 getAndRenderUserInfo();
 
-const cardsList = new Section({
-    items: initialCards,
-    renderer: (item) => {
-        const card = createNewCard(item.name, item.link);
-        cardsList.addItem(card);
-    }}, '.places');
+api.getUsersCards().then(result => {
+    const initialCards = [];
+    if (result) {
+        result.forEach(item => initialCards.push({name: item.name, link: item.link}))
+    } else { console.log('Cards list is empty'); }
+        generateCardsList(initialCards).renderItems();
+})
 
-cardsList.renderItems();
+function generateCardsList(items) {
+    const cardsList = new Section({
+        items,
+        renderer: (item) => {
+            const card = createNewCard(item.name, item.link);
+            cardsList.addItem(card);
+        }}, '.places');
+    return cardsList
+}
 
 const formValidators = {};
 
