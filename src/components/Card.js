@@ -1,12 +1,13 @@
 export default class Card {
 
-    constructor(name, imageSrc, userId, templateSelector, handleCardClick) {
+    constructor(name, imageSrc, id, templateSelector, handleCardClick, handleCardDelete) {
         this._name = name;
         this._imageSrc = imageSrc;
-        this._userId = userId;
+        this._id = id;
         this._cardElement = this._getCardElement(templateSelector);
         this._handleCardClick = handleCardClick;
         this._cardImage = this._cardElement.querySelector('.place__image');
+        this._handleCardDelete = handleCardDelete;
     }
 
     _getCardElement(templateSelector) {
@@ -26,6 +27,7 @@ export default class Card {
     _setEventListeners(deletable) {
         if (deletable) {
             this._cardElement.querySelector('.place__delete').addEventListener('click', (evt) => {
+                this._handleCardDelete(this._id);
                 this._removeCard(evt)
             });
         }

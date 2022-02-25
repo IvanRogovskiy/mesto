@@ -19,8 +19,12 @@ const userAvatar = document.querySelector('.profile__avatar');
 const api = new Api({baseUrl, headers});
 const userInfo = new UserInfo('.profile__info-name', '.profile__info-rank');
 
-function createNewCard(name, link, userId) {
-    const card = new Card(name, link, userId, '#place-template', handleCardClick);
+function handleCardDelete(cardId) {
+    api.deleteCard(cardId).then(res => console.log(res))
+}
+
+function createNewCard(name, link, id, userId) {
+    const card = new Card(name, link, id, '#place-template', handleCardClick, handleCardDelete);
     if (userId === userInfo.getUserId()) {
         return card.generateCard(true)
     }
@@ -70,7 +74,7 @@ const addCardPopup = new PopupWithForm({selector: '.popup_type_add',
     formSubmitter: ({title, src}) => {
         api.addNewCard({name:title, link: src})
             .then(res => {
-                cardsList.addItem(createNewCard(res.name, res.link, res.owner._id))
+                cardsList.addItem(createNewCard(res.name, res.link, res._id, res.owner._id))
             })
         addCardPopup.close();
     }
@@ -88,7 +92,7 @@ api.getUsersCards().then(result => {
     if (result) {
         const initialCards = [];
         result.forEach(item => {
-            initialCards.push({name: item.name, link: item.link, userId: item.owner._id});
+            initialCards.push({name: item.name, link: item.link, id: item._id, userId: item.owner._id});
         });
         cardsList.renderItems(initialCards.reverse());
     } else {
@@ -98,7 +102,7 @@ api.getUsersCards().then(result => {
 
 const cardsList = new Section({
     renderer: (item) => {
-        const card = createNewCard(item.name, item.link, item.userId);
+        const card = createNewCard(item.name, item.link, item.id, item.userId);
         cardsList.addItem(card);
     }}, '.places');
 

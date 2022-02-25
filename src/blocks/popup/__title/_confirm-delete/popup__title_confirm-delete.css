@@ -1,0 +1,5 @@
+@media screen and (max-width:480px) {
+    .popup__title_confirm-delete {
+        margin-bottom: 30px;
+    }
+}

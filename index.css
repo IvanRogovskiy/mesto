@@ -49,7 +49,9 @@
 @import url(src/blocks/popup/__input/_type/popup__input_type_src.css);
 @import url(src/blocks/popup/__input-form/popup__input-form.css);
 @import url(src/blocks/popup/__save/popup__save.css);
+@import url(src/blocks/popup/__save/_confirm-delete/popup__save_confirm-delete.css);
 @import url(src/blocks/popup/__title/popup__title.css);
+@import url(src/blocks/popup/__title/_confirm-delete/popup__title_confirm-delete.css);
 @import url(src/blocks/popup/_type/popup_type_add.css);
 @import url(src/blocks/popup/_type/popup_type_edit.css);
 @import url(src/blocks/popup/_type/popup_type_full.css);
