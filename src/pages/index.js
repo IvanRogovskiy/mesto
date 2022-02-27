@@ -7,6 +7,7 @@ import PopupWithImage from "../components/PopupWithImage";
 import PopupWithForm from "../components/PopupWithForm";
 import UserInfo from "../components/UserInfo";
 import Api from "../components/Api";
+import Popup from "../components/Popup";
 
 const addCardForm = document.querySelector('.popup__form_type_add');
 const editProfileForm = document.querySelector('.popup__form_type_edit');
@@ -19,8 +20,23 @@ const userAvatar = document.querySelector('.profile__avatar');
 const api = new Api({baseUrl, headers});
 const userInfo = new UserInfo('.profile__info-name', '.profile__info-rank');
 
-function handleCardDelete(cardId) {
-    api.deleteCard(cardId).then(res => console.log(res))
+const confirmDeletePopup = new PopupWithForm({selector: '.popup_type_delete',
+    formSubmitter: () => console.log('Created the instance for deleting confirmation popup')
+})
+
+function handleCardDelete(cardId,evt, context) {
+    confirmDeletePopup.overrideSubmitter(() => {
+        api.deleteCard(cardId, evt, context)
+            .then(() => {
+                context._removeCard(evt);
+                console.log(`Карточка с id ${cardId} успешно удалена`);
+            })
+            .catch((err) => console.log(`Произошла ошибка ${err} при удалении карточки с id ${cardId}`))
+        confirmDeletePopup.close()
+    });
+    confirmDeletePopup.setEventListeners()
+    confirmDeletePopup.open()
+
 }
 
 function createNewCard(name, link, id, userId) {

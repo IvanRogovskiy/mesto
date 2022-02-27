@@ -27,8 +27,8 @@ export default class Card {
     _setEventListeners(deletable) {
         if (deletable) {
             this._cardElement.querySelector('.place__delete').addEventListener('click', (evt) => {
-                this._handleCardDelete(this._id);
-                this._removeCard(evt)
+                evt.preventDefault();
+                this._handleCardDelete(this._id, evt, this);
             });
         }
         this._cardElement.querySelector('.place__fav').addEventListener('click', (evt) => {

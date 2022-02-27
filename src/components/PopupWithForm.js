@@ -30,6 +30,10 @@ export default class PopupWithForm extends Popup {
         })
     }
 
+    overrideSubmitter(newSubmitter) {
+        this._formSubmitter = newSubmitter;
+    }
+
     open() {
         super.open();
     }
