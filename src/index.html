@@ -89,8 +89,10 @@
                 <img alt="Изображение места" class="place__image" />
                 <div class="place__info">
                     <h2 class="place__name"></h2>
-                    <button type="button" class="place__fav">
-                    </button>
+                    <div class="place__fav-container">
+                        <button type="button" class="place__fav"></button>
+                        <p class="place__fav-counter">5</p>
+                    </div>
                 </div>
                 <img src="<%=require('./images/place-delete.svg')%>" alt="Кнопка удаления карточки" class="place__delete">
             </div>

@@ -7,7 +7,6 @@ import PopupWithImage from "../components/PopupWithImage";
 import PopupWithForm from "../components/PopupWithForm";
 import UserInfo from "../components/UserInfo";
 import Api from "../components/Api";
-import Popup from "../components/Popup";
 
 const addCardForm = document.querySelector('.popup__form_type_add');
 const editProfileForm = document.querySelector('.popup__form_type_edit');
@@ -39,8 +38,8 @@ function handleCardDelete(cardId,evt, context) {
 
 }
 
-function createNewCard(name, link, id, userId) {
-    const card = new Card(name, link, id, '#place-template', handleCardClick, handleCardDelete);
+function createNewCard(name, link, id, userId, likesCount) {
+    const card = new Card(name, link, id, likesCount, '#place-template', handleCardClick, handleCardDelete);
     if (userId === userInfo.getUserId()) {
         return card.generateCard(true)
     }
@@ -108,7 +107,7 @@ api.getUsersCards().then(result => {
     if (result) {
         const initialCards = [];
         result.forEach(item => {
-            initialCards.push({name: item.name, link: item.link, id: item._id, userId: item.owner._id});
+            initialCards.push({name: item.name, link: item.link, id: item._id, userId: item.owner._id, likesCount: item.likes.length});
         });
         cardsList.renderItems(initialCards.reverse());
     } else {
@@ -118,7 +117,7 @@ api.getUsersCards().then(result => {
 
 const cardsList = new Section({
     renderer: (item) => {
-        const card = createNewCard(item.name, item.link, item.id, item.userId);
+        const card = createNewCard(item.name, item.link, item.id, item.userId, item.likesCount);
         cardsList.addItem(card);
     }}, '.places');
 

@@ -1,9 +1,10 @@
 export default class Card {
 
-    constructor(name, imageSrc, id, templateSelector, handleCardClick, handleCardDelete) {
+    constructor(name, imageSrc, id, likesCount, templateSelector, handleCardClick, handleCardDelete) {
         this._name = name;
         this._imageSrc = imageSrc;
         this._id = id;
+        this._likesCount = likesCount
         this._cardElement = this._getCardElement(templateSelector);
         this._handleCardClick = handleCardClick;
         this._cardImage = this._cardElement.querySelector('.place__image');
@@ -43,6 +44,7 @@ export default class Card {
         this._cardElement.querySelector('.place__name').textContent = this._name;
         this._cardImage.src = this._imageSrc;
         this._cardImage.alt = `На фото изображен ${this._name}`;
+        this._cardElement.querySelector('.place__fav-counter').textContent = this._likesCount;
         if (!deletable) {
             this._cardElement.querySelector('.place').removeChild(this._cardElement.querySelector('.place__delete'));
             this._setEventListeners(false);
