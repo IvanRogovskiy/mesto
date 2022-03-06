@@ -35,15 +35,32 @@ function handleCardDelete(cardId,evt, context) {
     });
     confirmDeletePopup.setEventListeners()
     confirmDeletePopup.open()
-
 }
 
-function createNewCard(name, link, id, userId, likesCount) {
-    const card = new Card(name, link, id, likesCount, '#place-template', handleCardClick, handleCardDelete);
-    if (userId === userInfo.getUserId()) {
-        return card.generateCard(true)
+function handleCardLike(cardId, evt, context) {
+    if (!evt.target.classList.contains('place__fav_liked')) {
+        api.addLike(cardId)
+            .then(res => context._updateLikesCounter(res.likes, evt))
+            .catch(err => console.log(`Error ${err} while card liking`))
+    } else {
+        api.removeLike(cardId)
+            .then(res => context._updateLikesCounter(res.likes, evt))
+            .catch(err => console.log(`Error ${err} while card unliking`))
     }
-    return card.generateCard();
+}
+
+function createNewCard(name, link, id, likes, owner) {
+    const card = new Card(name, link, id, likes, owner, '#place-template',
+        handleCardClick, handleCardDelete, handleCardLike);
+    let deletable = false;
+    let liked = false;
+    if (owner._id === userInfo.getUserId()) {
+        deletable = true;
+    }
+    if (likes.some((like) => { return like._id === userInfo.getUserId() })) {
+        liked = true;
+    }
+    return card.generateCard(deletable, liked);
 }
 
 function getAndRenderUserInfo() {
@@ -89,7 +106,7 @@ const addCardPopup = new PopupWithForm({selector: '.popup_type_add',
     formSubmitter: ({title, src}) => {
         api.addNewCard({name:title, link: src})
             .then(res => {
-                cardsList.addItem(createNewCard(res.name, res.link, res._id, res.owner._id))
+                cardsList.addItem(createNewCard(res.name, res.link, res._id, res.likes, res.owner))
             })
         addCardPopup.close();
     }
@@ -107,7 +124,7 @@ api.getUsersCards().then(result => {
     if (result) {
         const initialCards = [];
         result.forEach(item => {
-            initialCards.push({name: item.name, link: item.link, id: item._id, userId: item.owner._id, likesCount: item.likes.length});
+            initialCards.push({name: item.name, link: item.link, id: item._id, likes: item.likes, owner: item.owner});
         });
         cardsList.renderItems(initialCards.reverse());
     } else {
@@ -117,7 +134,7 @@ api.getUsersCards().then(result => {
 
 const cardsList = new Section({
     renderer: (item) => {
-        const card = createNewCard(item.name, item.link, item.id, item.userId, item.likesCount);
+        const card = createNewCard(item.name, item.link, item.id, item.likes, item.owner);
         cardsList.addItem(card);
     }}, '.places');
 

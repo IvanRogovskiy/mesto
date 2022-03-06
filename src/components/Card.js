@@ -1,14 +1,17 @@
 export default class Card {
 
-    constructor(name, imageSrc, id, likesCount, templateSelector, handleCardClick, handleCardDelete) {
+    constructor(name, imageSrc, id, likes, owner, templateSelector, handleCardClick, handleCardDelete, handleCardLike) {
         this._name = name;
         this._imageSrc = imageSrc;
         this._id = id;
-        this._likesCount = likesCount
+        this._likes = likes;
+        this._owner = owner;
         this._cardElement = this._getCardElement(templateSelector);
         this._handleCardClick = handleCardClick;
         this._cardImage = this._cardElement.querySelector('.place__image');
         this._handleCardDelete = handleCardDelete;
+        this._handleCardLike = handleCardLike;
+        this._likesCounter = this._cardElement.querySelector('.place__fav-counter');
     }
 
     _getCardElement(templateSelector) {
@@ -21,7 +24,13 @@ export default class Card {
         evt.target.closest('.place').remove();
     };
 
-    _handleLike(evt) {
+    _updateLikesCounter(likesArray, evt) {
+        //если place__fav_liked нету то делаем put на лайк - в ответе берем количество лайков и апдейтим
+        //на верстке, а также меняем статус иконки
+        this._likesCounter.textContent = likesArray.length
+        // if (!evt.target.classList.contains('place__fav_liked')) {
+        // }
+        //
         evt.target.classList.toggle('place__fav_liked')
     };
 
@@ -33,18 +42,19 @@ export default class Card {
             });
         }
         this._cardElement.querySelector('.place__fav').addEventListener('click', (evt) => {
-            this._handleLike(evt)
+            this._handleCardLike(this._id, evt, this)
         });
         this._cardImage.addEventListener('click', () => {
             this._handleCardClick(this._name, this._imageSrc);
         });
     }
 
-    generateCard(deletable = false) {
+    generateCard(deletable = false, liked) {
         this._cardElement.querySelector('.place__name').textContent = this._name;
         this._cardImage.src = this._imageSrc;
         this._cardImage.alt = `На фото изображен ${this._name}`;
-        this._cardElement.querySelector('.place__fav-counter').textContent = this._likesCount;
+        this._likesCounter.textContent = this._likes.length;
+        if (liked) { this._cardElement.querySelector('.place__fav').classList.add('place__fav_liked') }
         if (!deletable) {
             this._cardElement.querySelector('.place').removeChild(this._cardElement.querySelector('.place__delete'));
             this._setEventListeners(false);
