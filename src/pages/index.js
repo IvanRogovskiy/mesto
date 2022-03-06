@@ -10,10 +10,12 @@ import Api from "../components/Api";
 
 const addCardForm = document.querySelector('.popup__form_type_add');
 const editProfileForm = document.querySelector('.popup__form_type_edit');
+const updateAvatarForm = document.querySelector('.popup__form_type_update-avatar')
 
 const editProfileButton = document.querySelector('.profile__info-edit-button');
 const addPlaceCardButton = document.querySelector('.profile__add-button');
 
+const userAvatarContainer = document.querySelector('.profile__avatar-container');
 const userAvatar = document.querySelector('.profile__avatar');
 
 const api = new Api({baseUrl, headers});
@@ -87,7 +89,7 @@ const editProfilePopup = new PopupWithForm({selector:'.popup_type_edit',
     formSubmitter: ({name, rank}) => {
         api.updateUserInfo({name, about: rank}).then(res => {
             if (res.name !== name || res.about !== rank) {
-                throw new Error('Profile has been updated incorrectly')
+                throw new Error('Ошибка при обновлении профиля')
             }
             userInfo.setUserInfo(res.name, res.about);
         })
@@ -137,6 +139,22 @@ const cardsList = new Section({
         const card = createNewCard(item.name, item.link, item.id, item.likes, item.owner);
         cardsList.addItem(card);
     }}, '.places');
+
+const updateAvatarPopup = new PopupWithForm({selector: '.popup_type_update-avatar',
+    formSubmitter: ({link}) => {
+        api.updateUserAvatar(link)
+            .then(() => { getAndRenderUserInfo();})
+            .catch(err => console.error(`Ошибка ${err} при обновлении аватара пользователя`))
+        updateAvatarPopup.close();
+    }
+});
+updateAvatarPopup.setEventListeners();
+
+userAvatarContainer.addEventListener('click', (evt) => {
+    formValidators[updateAvatarForm.getAttribute('name')].resetValidation();
+    updateAvatarPopup.open();
+    formValidators[addCardForm.getAttribute('name')].resetValidation();
+});
 
 const formValidators = {};
 
