@@ -98,4 +98,18 @@ export default class Api {
                 return Promise.reject(`Ошибка ${res.status} при удалении лайка карточки с id ${cardId}`)
             })
     }
+
+    updateUserAvatar(link) {
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                avatar: link,
+            })
+        })
+            .then(res => {
+                if (res.ok) { return res.json() }
+                return Promise.reject(`Ошибка ${res.status} при обновлении аватара пользователя`)
+            })
+    }
 }

@@ -1,0 +1,25 @@
+.profile__avatar-container {
+    position: relative;
+
+}
+
+.profile__avatar-container::after {
+    content: '';
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    display: block;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    background-color: #2A2C2F;
+    position: absolute;
+    background-image: url("../../../images/profile-edit-button.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 26px 26px;
+}
+
+.profile__avatar-container:hover:after {
+    opacity: 80%;
+}
