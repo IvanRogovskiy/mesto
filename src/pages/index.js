@@ -22,8 +22,22 @@ const api = new Api({baseUrl, headers});
 const userInfo = new UserInfo('.profile__info-name', '.profile__info-rank');
 
 const confirmDeletePopup = new PopupWithForm({selector: '.popup_type_delete',
-    formSubmitter: () => console.log('Created the instance for deleting confirmation popup')
+    formSubmitter: () => console.log('Создание инстанса обьекта попапа с формой')
 })
+
+function renderLoading(popup, isLoading) {
+    if (!isLoading) {
+        if (popup === addCardPopup) {
+            popup.setSubmitBtnText('Создать')
+        }
+        if (popup === editProfilePopup || popup === updateAvatarPopup) {
+            popup.setSubmitBtnText('Сохранить')
+        }
+
+    } else {
+        popup.setSubmitBtnText('Сохранение...')
+    }
+}
 
 function handleCardDelete(cardId,evt, context) {
     confirmDeletePopup.overrideSubmitter(() => {
@@ -87,12 +101,18 @@ popupWithImage.setEventListeners();
 
 const editProfilePopup = new PopupWithForm({selector:'.popup_type_edit',
     formSubmitter: ({name, rank}) => {
-        api.updateUserInfo({name, about: rank}).then(res => {
+        renderLoading(editProfilePopup, true);
+        api.updateUserInfo({name, about: rank})
+            .then(res => {
             if (res.name !== name || res.about !== rank) {
                 throw new Error('Ошибка при обновлении профиля')
             }
             userInfo.setUserInfo(res.name, res.about);
         })
+            .catch((err) => console.log(err))
+            .finally(() => {
+                renderLoading(editProfilePopup, false);
+            })
         editProfilePopup.close();
         formValidators[editProfileForm.getAttribute('name')].resetValidation();
     }
@@ -106,9 +126,15 @@ editProfileButton.addEventListener('click', () => {
 
 const addCardPopup = new PopupWithForm({selector: '.popup_type_add',
     formSubmitter: ({title, src}) => {
+        renderLoading(addCardPopup, true);
         api.addNewCard({name:title, link: src})
             .then(res => {
                 cardsList.addItem(createNewCard(res.name, res.link, res._id, res.likes, res.owner))
+            })
+            .catch((err) => console.log(err))
+            .finally(() => {
+                renderLoading(addCardPopup, false);
+
             })
         addCardPopup.close();
     }
@@ -142,9 +168,11 @@ const cardsList = new Section({
 
 const updateAvatarPopup = new PopupWithForm({selector: '.popup_type_update-avatar',
     formSubmitter: ({link}) => {
+        renderLoading(updateAvatarPopup, true)
         api.updateUserAvatar(link)
             .then(() => { getAndRenderUserInfo();})
             .catch(err => console.error(`Ошибка ${err} при обновлении аватара пользователя`))
+            .finally(() => { renderLoading(updateAvatarPopup, false) })
         updateAvatarPopup.close();
     }
 });

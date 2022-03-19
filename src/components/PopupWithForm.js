@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
         super(selector);
         this._formSubmitter = formSubmitter;
         this._form = this._popup.querySelector('form');
+        this._submitBtn = this._form.querySelector('.popup__save');
     }
 
     _getInputValues() {
@@ -28,6 +29,10 @@ export default class PopupWithForm extends Popup {
         Object.keys(values).forEach(key => {
             this._form.querySelector(`input[name=${key}]`).value = values[key];
         })
+    }
+
+    setSubmitBtnText(text) {
+        this._submitBtn.value = text;
     }
 
     overrideSubmitter(newSubmitter) {
