@@ -25,12 +25,7 @@ export default class Card {
     };
 
     _updateLikesCounter(likesArray, evt) {
-        //если place__fav_liked нету то делаем put на лайк - в ответе берем количество лайков и апдейтим
-        //на верстке, а также меняем статус иконки
         this._likesCounter.textContent = likesArray.length
-        // if (!evt.target.classList.contains('place__fav_liked')) {
-        // }
-        //
         evt.target.classList.toggle('place__fav_liked')
     };
 
