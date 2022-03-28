@@ -1,8 +1,9 @@
 export default class UserInfo {
 
-    constructor(nameSelector, rankSelector) {
+    constructor(nameSelector, rankSelector, avatarSelector) {
         this._nameElement = document.querySelector(nameSelector);
         this._rankElement = document.querySelector(rankSelector);
+        this._userAvatar = document.querySelector(avatarSelector)
     }
 
     getUserInfo() {
@@ -17,6 +18,10 @@ export default class UserInfo {
         this._rankElement.textContent = rank;
     }
 
+    setUserAvatar(avatar) {
+        this._userAvatar.src = avatar;
+    }
+
     setUserId(userId) {
         this._userId = userId
     }
@@ -24,4 +29,5 @@ export default class UserInfo {
     getUserId() {
         return this._userId
     }
+
 }

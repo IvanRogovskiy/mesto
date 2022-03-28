@@ -1,6 +1,6 @@
-import Card from "../components/Card.js";
-import FormValidator from "../components/FormValidator.js";
-import {baseUrl, headers, validationParams} from "../utils/constants.js";
+import Card from "../components/Card";
+import FormValidator from "../components/FormValidator";
+import {baseUrl, headers, validationParams} from "../utils/constants";
 import '../../index.css';
 import Section from "../components/Section";
 import PopupWithImage from "../components/PopupWithImage";
@@ -19,11 +19,12 @@ const userAvatarContainer = document.querySelector('.profile__avatar-container')
 const userAvatar = document.querySelector('.profile__avatar');
 
 const api = new Api({baseUrl, headers});
-const userInfo = new UserInfo('.profile__info-name', '.profile__info-rank');
+const userInfo = new UserInfo('.profile__info-name', '.profile__info-rank', '.profile__avatar');
 
 const confirmDeletePopup = new PopupWithForm({selector: '.popup_type_delete',
     formSubmitter: () => console.log('Создание инстанса обьекта попапа с формой')
-})
+});
+confirmDeletePopup.setEventListeners();
 
 function renderLoading(popup, isLoading) {
     if (!isLoading) {
@@ -43,24 +44,25 @@ function handleCardDelete(cardId,evt, context) {
     confirmDeletePopup.overrideSubmitter(() => {
         api.deleteCard(cardId, evt, context)
             .then(() => {
-                context._removeCard(evt);
+                context.removeCard(evt);
                 console.log(`Карточка с id ${cardId} успешно удалена`);
+                confirmDeletePopup.close();
             })
             .catch((err) => console.log(`Произошла ошибка ${err} при удалении карточки с id ${cardId}`))
-        confirmDeletePopup.close()
+
     });
-    confirmDeletePopup.setEventListeners()
+    // confirmDeletePopup.setEventListeners()
     confirmDeletePopup.open()
 }
 
 function handleCardLike(cardId, evt, context) {
     if (!evt.target.classList.contains('place__fav_liked')) {
         api.addLike(cardId)
-            .then(res => context._updateLikesCounter(res.likes, evt))
+            .then(res => context.updateLikesCounter(res.likes, evt))
             .catch(err => console.log(`Error ${err} while card liking`))
     } else {
         api.removeLike(cardId)
-            .then(res => context._updateLikesCounter(res.likes, evt))
+            .then(res => context.updateLikesCounter(res.likes, evt))
             .catch(err => console.log(`Error ${err} while card unliking`))
     }
 }
@@ -83,12 +85,12 @@ function getAndRenderUserInfo() {
     api.getMyProfileInfo()
         .then(userData => {
             const {name, about, avatar, _id} = userData;
+            //ниже я использую userInfo для управления данными пользователя
             userInfo.setUserInfo(name, about)
             userInfo.setUserId(_id);
             if (avatar) {
-                userAvatar.src = avatar;
+                userInfo.setUserAvatar(avatar)
             }
-
         })
         .catch(error => console.log(error));
 }
@@ -108,12 +110,12 @@ const editProfilePopup = new PopupWithForm({selector:'.popup_type_edit',
                 throw new Error('Ошибка при обновлении профиля')
             }
             userInfo.setUserInfo(res.name, res.about);
+            editProfilePopup.close();
         })
             .catch((err) => console.log(err))
             .finally(() => {
                 renderLoading(editProfilePopup, false);
             })
-        editProfilePopup.close();
         formValidators[editProfileForm.getAttribute('name')].resetValidation();
     }
 });
@@ -129,14 +131,13 @@ const addCardPopup = new PopupWithForm({selector: '.popup_type_add',
         renderLoading(addCardPopup, true);
         api.addNewCard({name:title, link: src})
             .then(res => {
-                cardsList.addItem(createNewCard(res.name, res.link, res._id, res.likes, res.owner))
+                cardsList.addItem(createNewCard(res.name, res.link, res._id, res.likes, res.owner));
+                addCardPopup.close();
             })
             .catch((err) => console.log(err))
             .finally(() => {
                 renderLoading(addCardPopup, false);
-
             })
-        addCardPopup.close();
     }
 });
 addCardPopup.setEventListeners();
@@ -170,10 +171,13 @@ const updateAvatarPopup = new PopupWithForm({selector: '.popup_type_update-avata
     formSubmitter: ({link}) => {
         renderLoading(updateAvatarPopup, true)
         api.updateUserAvatar(link)
-            .then(() => { getAndRenderUserInfo();})
+            .then(() => {
+                getAndRenderUserInfo();
+                updateAvatarPopup.close();
+            })
             .catch(err => console.error(`Ошибка ${err} при обновлении аватара пользователя`))
             .finally(() => { renderLoading(updateAvatarPopup, false) })
-        updateAvatarPopup.close();
+
     }
 });
 updateAvatarPopup.setEventListeners();

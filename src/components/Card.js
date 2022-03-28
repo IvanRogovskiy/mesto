@@ -20,11 +20,11 @@ export default class Card {
             .cloneNode(true)
     };
 
-    _removeCard(evt) {
+    removeCard(evt) {
         evt.target.closest('.place').remove();
     };
 
-    _updateLikesCounter(likesArray, evt) {
+    updateLikesCounter(likesArray, evt) {
         this._likesCounter.textContent = likesArray.length
         evt.target.classList.toggle('place__fav_liked')
     };

@@ -2,6 +2,7 @@ import Popup from "./Popup";
 
 export default class PopupWithForm extends Popup {
 
+    //вроде по одному разу создаю попап каждого вида
     constructor({selector, formSubmitter}) {
         super(selector);
         this._formSubmitter = formSubmitter;
