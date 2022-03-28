@@ -40,7 +40,7 @@ function renderLoading(popup, isLoading) {
     }
 }
 
-function handleCardDelete(cardId,evt, context) {
+function handleCardDelete(cardId, evt, context) {
     confirmDeletePopup.overrideSubmitter(() => {
         api.deleteCard(cardId, evt, context)
             .then(() => {
