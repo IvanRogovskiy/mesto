@@ -51,7 +51,6 @@ function handleCardDelete(cardId, evt, context) {
             .catch((err) => console.log(`Произошла ошибка ${err} при удалении карточки с id ${cardId}`))
 
     });
-    // confirmDeletePopup.setEventListeners()
     confirmDeletePopup.open()
 }
 
