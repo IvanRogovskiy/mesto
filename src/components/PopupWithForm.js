@@ -2,17 +2,18 @@ import Popup from "./Popup";
 
 export default class PopupWithForm extends Popup {
 
-    //вроде по одному разу создаю попап каждого вида
     constructor({selector, formSubmitter}) {
         super(selector);
         this._formSubmitter = formSubmitter;
         this._form = this._popup.querySelector('form');
         this._submitBtn = this._form.querySelector('.popup__save');
+        this._submitBtnText = this._submitBtn.value
+        this._popupInput = this._popup.querySelectorAll('.popup__input');
     }
 
     _getInputValues() {
-        let formValues = {};
-        this._popup.querySelectorAll('.popup__input').forEach(input => {
+        const formValues = {};
+        this._popupInput.forEach(input => {
             formValues[input.name] = input.value;
         });
         return formValues
@@ -40,8 +41,12 @@ export default class PopupWithForm extends Popup {
         this._formSubmitter = newSubmitter;
     }
 
-    open() {
-        super.open();
+    renderLoading(isLoading, loadingText='Сохранение...') {
+        if (isLoading) {
+            this._submitBtn.value = loadingText;
+        } else {
+            this._submitBtn.value = this._submitBtnText;
+        }
     }
 
     close() {

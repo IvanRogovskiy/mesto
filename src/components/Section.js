@@ -16,6 +16,8 @@ export default class Section {
         });
     };
 
+    // Можно было бы сделать функцию renderer обычной функцией создания карточки (без вставки ее в DOM)
+    // Я не понял, где я в renderer вставляют карточку в DOM
     addItem(element) {
         this._container.prepend(element);
     }

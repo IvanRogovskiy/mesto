@@ -10,13 +10,11 @@ import Api from "../components/Api";
 
 const addCardForm = document.querySelector('.popup__form_type_add');
 const editProfileForm = document.querySelector('.popup__form_type_edit');
-const updateAvatarForm = document.querySelector('.popup__form_type_update-avatar')
 
 const editProfileButton = document.querySelector('.profile__info-edit-button');
 const addPlaceCardButton = document.querySelector('.profile__add-button');
 
 const userAvatarContainer = document.querySelector('.profile__avatar-container');
-const userAvatar = document.querySelector('.profile__avatar');
 
 const api = new Api({baseUrl, headers});
 const userInfo = new UserInfo('.profile__info-name', '.profile__info-rank', '.profile__avatar');
@@ -25,20 +23,6 @@ const confirmDeletePopup = new PopupWithForm({selector: '.popup_type_delete',
     formSubmitter: () => console.log('Создание инстанса обьекта попапа с формой')
 });
 confirmDeletePopup.setEventListeners();
-
-function renderLoading(popup, isLoading) {
-    if (!isLoading) {
-        if (popup === addCardPopup) {
-            popup.setSubmitBtnText('Создать')
-        }
-        if (popup === editProfilePopup || popup === updateAvatarPopup) {
-            popup.setSubmitBtnText('Сохранить')
-        }
-
-    } else {
-        popup.setSubmitBtnText('Сохранение...')
-    }
-}
 
 function handleCardDelete(cardId, evt, context) {
     confirmDeletePopup.overrideSubmitter(() => {
@@ -55,7 +39,7 @@ function handleCardDelete(cardId, evt, context) {
 }
 
 function handleCardLike(cardId, evt, context) {
-    if (!evt.target.classList.contains('place__fav_liked')) {
+    if (!context.isLiked(evt)) {
         api.addLike(cardId)
             .then(res => context.updateLikesCounter(res.likes, evt))
             .catch(err => console.log(`Error ${err} while card liking`))
@@ -69,29 +53,28 @@ function handleCardLike(cardId, evt, context) {
 function createNewCard(name, link, id, likes, owner) {
     const card = new Card(name, link, id, likes, owner, '#place-template',
         handleCardClick, handleCardDelete, handleCardLike);
-    let deletable = false;
-    let liked = false;
-    if (owner._id === userInfo.getUserId()) {
-        deletable = true;
-    }
-    if (likes.some((like) => { return like._id === userInfo.getUserId() })) {
-        liked = true;
-    }
-    return card.generateCard(deletable, liked);
+    return card.generateCard(owner, likes, userInfo.getUserId());
 }
 
-function getAndRenderUserInfo() {
-    api.getMyProfileInfo()
-        .then(userData => {
-            const {name, about, avatar, _id} = userData;
-            //ниже я использую userInfo для управления данными пользователя
-            userInfo.setUserInfo(name, about)
-            userInfo.setUserId(_id);
-            if (avatar) {
-                userInfo.setUserAvatar(avatar)
-            }
-        })
-        .catch(error => console.log(error));
+function renderUserInfo(userData) {
+    const {name, about, avatar, _id} = userData;
+    userInfo.setUserInfo(name, about)
+    userInfo.setUserId(_id);
+    if (avatar) {
+        userInfo.setUserAvatar(avatar)
+    }
+}
+
+function renderUserCards(result) {
+    if (result) {
+        const initialCards = [];
+        result.forEach(item => {
+            initialCards.push({name: item.name, link: item.link, id: item._id, likes: item.likes, owner: item.owner});
+        });
+        cardsList.renderItems(initialCards.reverse());
+    } else {
+        console.log('Cards list is empty');
+    }
 }
 
 const popupWithImage = new PopupWithImage('.popup_type_full');
@@ -102,7 +85,8 @@ popupWithImage.setEventListeners();
 
 const editProfilePopup = new PopupWithForm({selector:'.popup_type_edit',
     formSubmitter: ({name, rank}) => {
-        renderLoading(editProfilePopup, true);
+        editProfilePopup.renderLoading(true);
+        // renderLoading(editProfilePopup, true);
         api.updateUserInfo({name, about: rank})
             .then(res => {
             if (res.name !== name || res.about !== rank) {
@@ -113,21 +97,21 @@ const editProfilePopup = new PopupWithForm({selector:'.popup_type_edit',
         })
             .catch((err) => console.log(err))
             .finally(() => {
-                renderLoading(editProfilePopup, false);
+                editProfilePopup.renderLoading(false);
             })
-        formValidators[editProfileForm.getAttribute('name')].resetValidation();
     }
 });
 editProfilePopup.setEventListeners();
 
 editProfileButton.addEventListener('click', () => {
     editProfilePopup.setFieldValues(userInfo.getUserInfo());
+    formValidators[editProfileForm.getAttribute('name')].resetValidation();
     editProfilePopup.open();
 });
 
 const addCardPopup = new PopupWithForm({selector: '.popup_type_add',
     formSubmitter: ({title, src}) => {
-        renderLoading(addCardPopup, true);
+        addCardPopup.renderLoading(true);
         api.addNewCard({name:title, link: src})
             .then(res => {
                 cardsList.addItem(createNewCard(res.name, res.link, res._id, res.likes, res.owner));
@@ -135,7 +119,7 @@ const addCardPopup = new PopupWithForm({selector: '.popup_type_add',
             })
             .catch((err) => console.log(err))
             .finally(() => {
-                renderLoading(addCardPopup, false);
+                addCardPopup.renderLoading(false);
             })
     }
 });
@@ -146,19 +130,12 @@ addPlaceCardButton.addEventListener('click', () => {
     addCardPopup.open()
 });
 
-getAndRenderUserInfo();
-
-api.getUsersCards().then(result => {
-    if (result) {
-        const initialCards = [];
-        result.forEach(item => {
-            initialCards.push({name: item.name, link: item.link, id: item._id, likes: item.likes, owner: item.owner});
-        });
-        cardsList.renderItems(initialCards.reverse());
-    } else {
-        console.log('Cards list is empty');
-    }
-})
+Promise.all([api.getUsersCards(), api.getMyProfileInfo()])
+    .then(([userCards, userData]) => {
+        renderUserInfo(userData);
+        renderUserCards(userCards);
+    })
+    .catch(err => console.log(err))
 
 const cardsList = new Section({
     renderer: (item) => {
@@ -168,21 +145,20 @@ const cardsList = new Section({
 
 const updateAvatarPopup = new PopupWithForm({selector: '.popup_type_update-avatar',
     formSubmitter: ({link}) => {
-        renderLoading(updateAvatarPopup, true)
+        updateAvatarPopup.renderLoading(true);
         api.updateUserAvatar(link)
-            .then(() => {
-                getAndRenderUserInfo();
+            .then((res) => {
+                userInfo.setUserAvatar(res.avatar)
                 updateAvatarPopup.close();
             })
             .catch(err => console.error(`Ошибка ${err} при обновлении аватара пользователя`))
-            .finally(() => { renderLoading(updateAvatarPopup, false) })
+            .finally(() => { updateAvatarPopup.renderLoading(false) })
 
     }
 });
 updateAvatarPopup.setEventListeners();
 
 userAvatarContainer.addEventListener('click', (evt) => {
-    formValidators[updateAvatarForm.getAttribute('name')].resetValidation();
     updateAvatarPopup.open();
     formValidators[addCardForm.getAttribute('name')].resetValidation();
 });

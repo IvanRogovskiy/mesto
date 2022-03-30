@@ -9,11 +9,8 @@ export default class Api {
             headers:this._headers
         })
             .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Ошибка ${res.status}`)
-            })
+                return this._checkResponse(res, 'Ошибка получения данных профиля')}
+            )
     }
 
     getUsersCards() {
@@ -21,11 +18,8 @@ export default class Api {
             headers: this._headers
         })
             .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Ошибка ${res.status}`)
-            })
+                return this._checkResponse(res, 'Ошибка получения карточек')}
+            )
     }
 
     updateUserInfo({name, about}) {
@@ -38,9 +32,8 @@ export default class Api {
             })
         })
             .then(res => {
-                if (res.ok) { return res.json() }
-                return Promise.reject(`Ошибка ${res.status} при обновлении данных юзера`)
-            })
+                return this._checkResponse(res, 'Ошибка при обновлении данных юзера') }
+            )
     }
 
     addNewCard({name, link}) {
@@ -53,8 +46,7 @@ export default class Api {
             })
         })
             .then(res => {
-                if (res.ok) { return res.json() }
-                return Promise.reject(`Ошибка ${res.status} при создании карточки`)
+                return this._checkResponse(res, `Ошибка ${res.status} при создании карточки`)
             })
     }
 
@@ -64,8 +56,7 @@ export default class Api {
             headers: this._headers,
         })
             .then(res => {
-                if (res.ok) { return res.json() }
-                return Promise.reject(`Ошибка ${res.status} при удалении карточки с id ${cardId}`)
+                return this._checkResponse(res, `Ошибка ${res.status} при удалении карточки с id ${cardId}`)
             })
     }
 
@@ -75,8 +66,7 @@ export default class Api {
             headers: this._headers,
         })
             .then(res => {
-                if (res.ok) { return res.json() }
-                return Promise.reject(`Ошибка ${res.status} при лайке карточки с id ${cardId}`)
+                return this._checkResponse(res, `Ошибка ${res.status} при лайке карточки с id ${cardId}`)
             })
     }
 
@@ -86,8 +76,7 @@ export default class Api {
             headers: this._headers,
         })
             .then(res => {
-                if (res.ok) { return res.json() }
-                return Promise.reject(`Ошибка ${res.status} при удалении лайка карточки с id ${cardId}`)
+                return this._checkResponse(res, `Ошибка ${res.status} при удалении лайка карточки с id ${cardId}`)
             })
     }
 
@@ -100,8 +89,12 @@ export default class Api {
             })
         })
             .then(res => {
-                if (res.ok) { return res.json() }
-                return Promise.reject(`Ошибка ${res.status} при обновлении аватара пользователя`)
+                return this._checkResponse(res, `Ошибка ${res.status} при обновлении аватара пользователя`)
             })
+    }
+
+    _checkResponse(res, msg) {
+        if (res.ok) { return res.json() }
+        return Promise.reject(msg)
     }
 }

@@ -44,11 +44,19 @@ export default class Card {
         });
     }
 
-    generateCard(deletable = false, liked) {
+    generateCard(owner, likes, userId) {
         this._cardElement.querySelector('.place__name').textContent = this._name;
         this._cardImage.src = this._imageSrc;
         this._cardImage.alt = `На фото изображен ${this._name}`;
         this._likesCounter.textContent = this._likes.length;
+        let deletable = false;
+        let liked = false;
+        if (owner._id === userId) {
+            deletable = true;
+        }
+        if (likes.some((like) => { return like._id === userId })) {
+            liked = true;
+        }
         if (liked) { this._cardElement.querySelector('.place__fav').classList.add('place__fav_liked') }
         if (!deletable) {
             this._cardElement.querySelector('.place').removeChild(this._cardElement.querySelector('.place__delete'));
@@ -57,5 +65,9 @@ export default class Card {
             this._setEventListeners(true);
         }
         return this._cardElement;
+    }
+
+    isLiked(evt) {
+        return evt.target.classList.contains('place__fav_liked')
     }
 }
