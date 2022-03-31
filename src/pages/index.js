@@ -10,6 +10,7 @@ import Api from "../components/Api";
 
 const addCardForm = document.querySelector('.popup__form_type_add');
 const editProfileForm = document.querySelector('.popup__form_type_edit');
+const updateAvatarForm = document.querySelector('.popup__form_type_update-avatar');
 
 const editProfileButton = document.querySelector('.profile__info-edit-button');
 const addPlaceCardButton = document.querySelector('.profile__add-button');
@@ -160,7 +161,7 @@ updateAvatarPopup.setEventListeners();
 
 userAvatarContainer.addEventListener('click', (evt) => {
     updateAvatarPopup.open();
-    formValidators[addCardForm.getAttribute('name')].resetValidation();
+    formValidators[updateAvatarForm.getAttribute('name')].resetValidation();
 });
 
 const formValidators = {};

@@ -33,10 +33,6 @@ export default class PopupWithForm extends Popup {
         })
     }
 
-    setSubmitBtnText(text) {
-        this._submitBtn.value = text;
-    }
-
     overrideSubmitter(newSubmitter) {
         this._formSubmitter = newSubmitter;
     }
